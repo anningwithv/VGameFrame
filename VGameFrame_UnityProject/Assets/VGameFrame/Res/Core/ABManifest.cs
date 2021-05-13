@@ -23,7 +23,7 @@ namespace VGameFrame
         public string hash;
     }
 
-    public class Manifest : ScriptableObject
+    public class ABManifest : ScriptableObject
     {
         public string[] activeVariants = new string[0];
         public string[] dirs = new string[0];

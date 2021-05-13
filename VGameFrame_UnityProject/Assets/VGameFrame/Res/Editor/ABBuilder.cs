@@ -24,6 +24,7 @@ namespace VGameFrame
 
         public static void BuildAssetBundles()
         {
+            // Build asset bundles
             // Choose the output path according to the build target.
             var outputPath = CreateAssetBundleDirectory();
             const BuildAssetBundleOptions options = BuildAssetBundleOptions.ChunkBasedCompression;
@@ -35,7 +36,8 @@ namespace VGameFrame
             {
                 return;
             }
-
+            
+            // Build manifest
             var manifest = GetManifest();
             var dirs = new List<string>();
             var assets = new List<AssetRef>();
@@ -108,12 +110,13 @@ namespace VGameFrame
             BuildPipeline.BuildAssetBundles(outputPath, builds, options, targetPlatform);
             ArrayUtility.Add(ref bundles, manifestBundleName);
 
-            //Versions.BuildVersions(outputPath, bundles, GetBuildRules().AddVersion());
+            // Build versions
+            ABVersions.BuildVersions(outputPath, bundles, GetBuildRules().AddVersion());
         }
 
-        private static Manifest GetManifest()
+        private static ABManifest GetManifest()
         {
-            return GetAsset<Manifest>("Assets/Manifest.asset");
+            return GetAsset<ABManifest>("Assets/ABManifest.asset");
         }
 
         private static T GetAsset<T>(string path) where T : ScriptableObject

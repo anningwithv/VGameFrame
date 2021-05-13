@@ -20,11 +20,19 @@ MonoBehaviour:
   searchPatternPrefab: '*.prefab'
   searchPatternScene: '*.unity'
   searchPatternText: '*.txt,*.bytes,*.json,*.csv,*.xml,*htm,*.html,*.yaml,*.fnt'
-  version: 0
+  version: 1
   rules:
   - searchPath: Assets/VGameFrame/Demo/UI
     searchPattern: '*'
     nameBy: 2
     assetBundleName: 
-  ruleAssets: []
-  ruleBundles: []
+  ruleAssets:
+  - bundle: assets/vgameframe/demo/ui/mainmenu.unity3d
+    path: Assets/VGameFrame/Demo/UI/MainMenu/MainMenuPanel.prefab
+  - bundle: assets/vgameframe/demo/ui/mainmenu.unity3d
+    path: Assets/VGameFrame/Demo/UI/MainMenu/Triangle.png
+  ruleBundles:
+  - name: assets/vgameframe/demo/ui/mainmenu.unity3d
+    assets:
+    - Assets/VGameFrame/Demo/UI/MainMenu/MainMenuPanel.prefab
+    - Assets/VGameFrame/Demo/UI/MainMenu/Triangle.png

@@ -105,11 +105,19 @@ namespace VGameFrame
 
         public void Apply()
         {
-            //Clear();
+            Clear();
             CollectAssets();
             //AnalysisAssets();
             //OptimizeAssets();
-            //Save();
+            Save();
+        }
+
+        public int AddVersion()
+        {
+            version = version + 1;
+            EditorUtility.SetDirty(this);
+            AssetDatabase.SaveAssets();
+            return version;
         }
 
         private void CollectAssets()
@@ -133,6 +141,54 @@ namespace VGameFrame
             list.Sort((a, b) => string.Compare(a.path, b.path, StringComparison.Ordinal));
             ruleAssets = list.ToArray();
         }
+
+        private void Clear()
+        {
+            _tracker.Clear();
+            _duplicated.Clear();
+            _conflicted.Clear();
+            _asset2Bundles.Clear();
+        }
+
+        private void Save()
+        {
+            var getBundles = GetBundles();
+            ruleBundles = new RuleBundle[getBundles.Count];
+            var i = 0;
+            foreach (var item in getBundles)
+            {
+                ruleBundles[i] = new RuleBundle
+                {
+                    name = item.Key,
+                    assets = item.Value.ToArray()
+                };
+                i++;
+            }
+
+            EditorUtility.ClearProgressBar();
+            EditorUtility.SetDirty(this);
+            AssetDatabase.SaveAssets();
+        }
+
+        private Dictionary<string, List<string>> GetBundles()
+        {
+            var bundles = new Dictionary<string, List<string>>();
+            foreach (var item in _asset2Bundles)
+            {
+                var bundle = item.Value;
+                List<string> list;
+                if (!bundles.TryGetValue(bundle, out list))
+                {
+                    list = new List<string>();
+                    bundles[bundle] = list;
+                }
+
+                if (!list.Contains(item.Key)) list.Add(item.Key);
+            }
+
+            return bundles;
+        }
+
 
         private void ApplyRule(BuildRule rule)
         {
