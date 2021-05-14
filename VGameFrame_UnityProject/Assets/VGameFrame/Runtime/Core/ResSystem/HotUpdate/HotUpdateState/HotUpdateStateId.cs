@@ -12,10 +12,14 @@ using UnityEngine;
 
 namespace VGameFrame
 {
-    [CreateAssetMenu(menuName = "VGameFrame/Create EngineConfig ")]
-    public class EngineConfig : ScriptableObject
+	public enum HotUpdateStateId
 	{
-        public string url = "http://172.16.1.170/DLC/";
-	}
+        Wait,
+        CopyVersionsFromLocal,
+        CopingVersionsFromLocal,
+        DownloadVersionsFromServer,
+        PreparedDownloadAB,
+        DownloadAB,
+    }
 	
 }

@@ -12,10 +12,19 @@ using UnityEngine;
 
 namespace VGameFrame
 {
-    [CreateAssetMenu(menuName = "VGameFrame/Create EngineConfig ")]
-    public class EngineConfig : ScriptableObject
-	{
-        public string url = "http://172.16.1.170/DLC/";
-	}
-	
+    public class HotUpdateState_Wait : FSMState<HotUpdateStateId>
+    {
+        public HotUpdateState_Wait(FSMStateMachine<HotUpdateStateId> stateMachine) : base(stateMachine)
+        {
+
+        }
+
+        public override void OnEnter()
+        {
+            base.OnEnter();
+
+            SetCurState(HotUpdateStateId.CopingVersionsFromLocal);
+        }
+    }
+
 }

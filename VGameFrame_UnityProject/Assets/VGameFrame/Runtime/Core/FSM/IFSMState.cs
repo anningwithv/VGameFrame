@@ -5,6 +5,7 @@
 //  Author:      V 
 //-------------------------------------------------------
 
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,10 +13,13 @@ using UnityEngine;
 
 namespace VGameFrame
 {
-    [CreateAssetMenu(menuName = "VGameFrame/Create EngineConfig ")]
-    public class EngineConfig : ScriptableObject
-	{
-        public string url = "http://172.16.1.170/DLC/";
+	public interface IFSMState<T> where T : IConvertible
+    {
+        T GetStateId();
+        void OnEnter();
+        void OnExecute();
+        void OnExit();
+
 	}
 	
 }

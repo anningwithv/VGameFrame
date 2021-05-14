@@ -231,21 +231,21 @@ namespace VGameFrame
         private IEnumerator RequestVersions()
         {
             OnMessage("正在获取版本信息...");
-            if (Application.internetReachability == NetworkReachability.NotReachable)
-            {
-                //var mb = MessageBox.Show("提示", "请检查网络连接状态", "重试", "退出");
-                //yield return mb;
-                //if (mb.isOk)
-                if (true)
-                {
-                    StartUpdate();
-                }
-                else
-                {
-                    Quit();
-                }
-                yield break;
-            }
+            //if (Application.internetReachability == NetworkReachability.NotReachable)
+            //{
+            //    //var mb = MessageBox.Show("提示", "请检查网络连接状态", "重试", "退出");
+            //    //yield return mb;
+            //    //if (mb.isOk)
+            //    if (true)
+            //    {
+            //        StartUpdate();
+            //    }
+            //    else
+            //    {
+            //        Quit();
+            //    }
+            //    yield break;
+            //}
 
             var request = UnityWebRequest.Get(GetDownloadURL(ABVersions.versionDetail));
             request.downloadHandler = new DownloadHandlerFile(_savePath + ABVersions.versionDetail);
@@ -257,14 +257,14 @@ namespace VGameFrame
                 //var mb = MessageBox.Show("提示", string.Format("获取服务器版本失败：{0}", error), "重试", "退出");
                 //yield return mb;
                 //if (mb.isOk)
-                if (true)
-                {
-                    StartUpdate();
-                }
-                else
-                {
-                    Quit();
-                }
+                //if (true)
+                //{
+                //    StartUpdate();
+                //}
+                //else
+                //{
+                //    Quit();
+                //}
                 yield break;
             }
             try
