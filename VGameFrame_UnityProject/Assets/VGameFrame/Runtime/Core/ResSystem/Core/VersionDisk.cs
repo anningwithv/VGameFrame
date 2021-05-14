@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace VGameFrame
 {
-	public class VFile
+	public class VersionFile
 	{
 		public string hash { get; set; }
 
@@ -18,7 +18,7 @@ namespace VGameFrame
 
 		public long offset { get; set; }
 
-		public VFile ()
+		public VersionFile ()
 		{
 			offset = -1;
 		}
@@ -38,17 +38,17 @@ namespace VGameFrame
 		}
 	}
 
-	public class VDisk
+	public class VersionDisk
 	{
 		private readonly byte[] _buffers = new byte[1024 * 4];
-		private readonly Dictionary<string, VFile> _data = new Dictionary<string, VFile> ();
-		private readonly List<VFile> _files = new List<VFile>();
-		public  List<VFile> files { get { return _files; }}
+		private readonly Dictionary<string, VersionFile> _data = new Dictionary<string, VersionFile> ();
+		private readonly List<VersionFile> _files = new List<VersionFile>();
+		public  List<VersionFile> files { get { return _files; }}
 		public string name { get; set; } 
 		private long _pos;
 		private long _len;
 
-		public VDisk ()
+		public VersionDisk ()
 		{
 		}
 
@@ -57,7 +57,7 @@ namespace VGameFrame
 			return files.Count > 0;
 		}
 
-		private void AddFile (VFile file)
+		private void AddFile (VersionFile file)
 		{
 			_data [file.name] = file;
 			files.Add (file);
@@ -65,7 +65,7 @@ namespace VGameFrame
 
 		public void AddFile (string path, long len, string hash)
 		{ 
-			var file = new VFile{ name = path, len = len, hash = hash };
+			var file = new VersionFile{ name = path, len = len, hash = hash };
 			AddFile (file);
 		}
 
@@ -99,7 +99,7 @@ namespace VGameFrame
 			using (var reader = new BinaryReader (File.OpenRead (path))) {
 				var count = reader.ReadInt32 ();
 				for (var i = 0; i < count; i++) {
-					var file = new VFile { id = i };
+					var file = new VersionFile { id = i };
 					file.Deserialize (reader);
 					AddFile (file); 
 				} 
@@ -119,15 +119,15 @@ namespace VGameFrame
 			}
 		} 
 
-		public VFile GetFile (string path, string hash)
+		public VersionFile GetFile (string path, string hash)
 		{
 			var key = Path.GetFileName (path);
-			VFile file;
+			VersionFile file;
 			_data.TryGetValue (key, out file);
 			return file;
 		}
 
-		public void Update(string dataPath, List<VFile> newFiles, List<VFile> saveFiles)
+		public void Update(string dataPath, List<VersionFile> newFiles, List<VersionFile> saveFiles)
 		{
 			var dir = Path.GetDirectoryName(dataPath); 
 			using (var stream = File.OpenRead(dataPath))
