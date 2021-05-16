@@ -7,3 +7,8 @@ VGameFrame_UnityProject/Library/
 VGameFrame_UnityProject/Temp/
 VGameFrame_UnityProject/obj/
 VGameFrame_UnityProject/Logs/
+VGameFrame_UnityProject/UniRx.csproj
+VGameFrame_UnityProject/UniRx.Examples.csproj
+VGameFrame_UnityProject/Assets/StreamingAssets.meta
+VGameFrame_UnityProject/Assets/StreamingAssets/
+VGameFrame_UnityProject/DLC/

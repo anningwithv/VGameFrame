@@ -12,14 +12,19 @@ using UnityEngine;
 
 namespace VGameFrame
 {
-	public enum HotUpdateStateId
-	{
-        Wait,
-        StartCopyVersionsFromLocal,
-        CopingVersionsFromStreamingAssets,
-        DownloadVersionsFromServer,
-        PreparedDownloadAB,
-        DownloadingAB,
+    public class HotUpdateState_DownloadingAB : FSMState<HotUpdateStateId>
+    {
+        public HotUpdateState_DownloadingAB(FSMStateMachine<HotUpdateStateId> stateMachine) : base(stateMachine)
+        {
+
+        }
+
+        public override void OnEnter()
+        {
+            base.OnEnter();
+
+            
+        }
     }
-	
+
 }

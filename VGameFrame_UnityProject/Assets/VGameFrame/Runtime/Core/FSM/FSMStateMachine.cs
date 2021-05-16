@@ -57,7 +57,7 @@ namespace VGameFrame
                 return;
             }
 
-            if (m_CurState != null && m_CurState.GetStateId().ToString() == key.ToString())
+            if (m_CurState != null && m_CurState.GetStateId().ToInt32(null) == key.ToInt32(null))
             {
                 return;
             }

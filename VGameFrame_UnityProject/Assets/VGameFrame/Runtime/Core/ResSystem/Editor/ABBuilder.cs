@@ -9,7 +9,7 @@ namespace VGameFrame
 {
     public static class ABBuilder
     {
-        public static string outputPath = "DLC/" + GetPlatformName();
+        public static string outputPath = Application.streamingAssetsPath + "/DLC/" + GetPlatformName();
 
         internal static ABBuildRules GetBuildRules()
         {
@@ -36,7 +36,7 @@ namespace VGameFrame
             {
                 return;
             }
-            
+
             // Build manifest
             var manifest = GetManifest();
             var dirs = new List<string>();

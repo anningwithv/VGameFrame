@@ -23,7 +23,7 @@ namespace VGameFrame
         {
             base.OnEnter();
 
-            SetCurState(HotUpdateStateId.CopingVersionsFromLocal);
+            SetCurState(HotUpdateStateId.StartCopyVersionsFromLocal);
         }
     }
 

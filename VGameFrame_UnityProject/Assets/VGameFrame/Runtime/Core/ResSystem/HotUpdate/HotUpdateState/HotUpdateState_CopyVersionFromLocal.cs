@@ -29,26 +29,30 @@ namespace VGameFrame
 
         private IEnumerator RequestCopy()
         {
-            var v1 = ABVersions.LoadVersion(ABHotUpdater1.Instance.SavePath + ABVersions.versionDetail);
-            var basePath = PlatformUtil.GetStreamingAssetsPath() + "/";
-            var request = UnityWebRequest.Get(basePath + ABVersions.versionDetail);
-            var path = ABHotUpdater1.Instance.SavePath + ABVersions.versionDetail + ".tmp";
-            request.downloadHandler = new DownloadHandlerFile(path);
+            //Load version from saved path
+            var versionInSavedPath = ABVersions.LoadVersion(ABHotUpdater1.Instance.SavePath + ABVersions.versionDetail);
+            var streamingAssetsPath = PlatformUtil.GetStreamingAssetsPath()+ "/DLC/" + ABHotUpdater1.Instance.Platform + "/";
+            //Download version from streaming assets path to saved path .tmp
+            var request = UnityWebRequest.Get(streamingAssetsPath + ABVersions.versionDetail);
+            var tmpSavedPath = ABHotUpdater1.Instance.SavePath + ABVersions.versionDetail + ".tmp";
+            request.downloadHandler = new DownloadHandlerFile(tmpSavedPath);
+
             yield return request.SendWebRequest();
+
             if (string.IsNullOrEmpty(request.error))
             {
-                var v2 = ABVersions.LoadVersion(path);
-                if (v2 > v1)
+                var versionInStreamingAssets = ABVersions.LoadVersion(tmpSavedPath);
+                if (versionInStreamingAssets > versionInSavedPath)
                 {
                     //var mb = MessageBox.Show("提示", "是否将资源解压到本地？", "解压", "跳过");
                     //yield return mb;
                     //_step = mb.isOk ? Step.Coping : Step.Versions;
                     //_step = Step.Coping;
-                    SetCurState(HotUpdateStateId.CopingVersionsFromLocal);
+                    SetCurState(HotUpdateStateId.CopingVersionsFromStreamingAssets);
                 }
                 else
                 {
-                    ABVersions.LoadVersions(path);
+                    ABVersions.LoadVersions(tmpSavedPath);
                     SetCurState(HotUpdateStateId.DownloadVersionsFromServer);
                 }
             }
