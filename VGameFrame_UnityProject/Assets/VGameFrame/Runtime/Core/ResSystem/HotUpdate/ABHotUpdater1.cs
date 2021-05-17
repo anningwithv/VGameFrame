@@ -28,7 +28,7 @@ namespace VGameFrame
 
         private void Start()
         {
-            m_SavePath = string.Format("{0}/DLC/", Application.persistentDataPath);
+            m_SavePath = string.Format("{0}/", Application.persistentDataPath);
             m_Platform = PlatformUtil.GetPlatformForAssetBundles(Application.platform);
             m_ABDownloader = gameObject.GetComponent<ABDownloader>();
             m_ABDownloader.onUpdate = OnUpdate;
@@ -62,7 +62,7 @@ namespace VGameFrame
             Debug.Log("Download progress: " + progress * 1f / size);
         }
 
-        private void OnComplete()
+        public void OnComplete()
         {
             //if (enableVFS)
             //{
@@ -102,6 +102,17 @@ namespace VGameFrame
             //}
 
             //StartCoroutine(LoadGameScene());
+
+            StartCoroutine(LoadManifest());
+        }
+
+        private IEnumerator LoadManifest()
+        {
+            ManifestRequest manifestRequest = ABResMgr.Instance.LoadManifest();
+
+            yield return manifestRequest;
+
+            Debug.Log("Manifest loaded");
         }
     }
 

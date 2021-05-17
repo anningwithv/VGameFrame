@@ -101,8 +101,8 @@ namespace VGameFrame
 
         internal virtual void Load()
         {
-            if (!ABResMgr.runtimeMode /*&& ABResMgr.loadDelegate != null*/)
-                asset = AssetDatabase.LoadAssetAtPath(name, assetType);
+            //if (!ABResMgr.runtimeMode /*&& ABResMgr.loadDelegate != null*/)
+            //    asset = AssetDatabase.LoadAssetAtPath(name, assetType);
             if (asset == null) error = "error! file not exist:" + name;
 
             loadState = LoadState.Loaded;
@@ -127,11 +127,11 @@ namespace VGameFrame
                 UpdateRequires();
             if (!isDone)
                 return true;
-            if (completed == null)
-                return false;
+            //if (completed == null)
+            //    return false;
             try
             {
-                completed.Invoke(this);
+                completed?.Invoke(this);
             }
             catch (Exception ex)
             {

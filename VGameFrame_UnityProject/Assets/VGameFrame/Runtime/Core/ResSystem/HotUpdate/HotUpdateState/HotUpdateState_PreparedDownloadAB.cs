@@ -37,12 +37,13 @@ namespace VGameFrame
                 }
                 else
                 {
+                    
                     //Quit();
                 }
             }
             else
             {
-                //OnComplete();
+                ABHotUpdater1.Instance.OnComplete();
             }
         }
     }

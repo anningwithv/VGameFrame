@@ -94,14 +94,14 @@ namespace VGameFrame
         public void StartUpdate()
         {
             Debug.Log("StartUpdate.Development:" + development);
-#if UNITY_EDITOR
-            if (development)
-            {
-                ABResMgr.runtimeMode = false;
-                //StartCoroutine(LoadGameScene());
-                return;
-            }
-#endif
+//#if UNITY_EDITOR
+//            if (development)
+//            {
+//                ABResMgr.runtimeMode = false;
+//                //StartCoroutine(LoadGameScene());
+//                return;
+//            }
+//#endif
             //OnStart();
 
             if (_checking != null)

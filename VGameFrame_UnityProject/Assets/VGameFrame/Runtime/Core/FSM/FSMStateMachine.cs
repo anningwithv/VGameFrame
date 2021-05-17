@@ -78,6 +78,8 @@ namespace VGameFrame
             IFSMState<T> state = GetState(stateId);
             if (state != null)
             {
+                Debug.Log("Set state to: " + stateId.ToString());
+
                 if (m_CurState != null)
                 {
                     m_CurState.OnExit();
