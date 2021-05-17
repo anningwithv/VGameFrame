@@ -26,6 +26,12 @@ namespace VGameFrame
             UnityEngine.Debug.Log("BuildAssetBundles " + watch.ElapsedMilliseconds + " ms.");
         }
 
+        [MenuItem("Assets/VGameFrame/ABBundle/ViewAssetBundles")]
+        private static void ViewDataPath()
+        {
+            EditorUtility.OpenWithDefaultApp(Application.persistentDataPath);
+        }
+
         private static void AddRulesForSelection(ABBuildRules rules, string searchPattern)
         {
             var isDir = rules.searchPatternDir.Equals(searchPattern);

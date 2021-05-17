@@ -23,5 +23,9 @@ namespace VGameFrame
         }
         #endregion
 
+        public void LoadAssetSync(string resName)
+        {
+
+        }
     }
 }
