@@ -12,9 +12,9 @@ using UnityEngine;
 
 namespace VGameFrame
 {
-    public class HotUpdateState_PrepareDownload : FSMState<HotUpdateStateId>
+    public class HotUpdateState_PreparedDownloadAB : FSMState<HotUpdateStateId>
     {
-        public HotUpdateState_PrepareDownload(FSMStateMachine<HotUpdateStateId> stateMachine) : base(stateMachine)
+        public HotUpdateState_PreparedDownloadAB(FSMStateMachine<HotUpdateStateId> stateMachine) : base(stateMachine)
         {
 
         }
@@ -33,7 +33,7 @@ namespace VGameFrame
                 if (true)
                 {
                     ABHotUpdater1.Instance.ABDownloader.StartDownload();
-                    SetCurState(HotUpdateStateId.DownloadAB);
+                    SetCurState(HotUpdateStateId.DownloadingAB);
                 }
                 else
                 {

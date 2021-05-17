@@ -31,14 +31,17 @@ namespace VGameFrame
             m_SavePath = string.Format("{0}/DLC/", Application.persistentDataPath);
             m_Platform = PlatformUtil.GetPlatformForAssetBundles(Application.platform);
             m_ABDownloader = gameObject.GetComponent<ABDownloader>();
+            m_ABDownloader.onUpdate = OnUpdate;
+            m_ABDownloader.onFinished = OnComplete;
 
             m_StateMachine = new FSMStateMachine<HotUpdateStateId>();
 
             m_StateMachine.RegisterState(HotUpdateStateId.Wait, new HotUpdateState_Wait(m_StateMachine));
-            m_StateMachine.RegisterState(HotUpdateStateId.CopyVersionsFromLocal, new HotUpdateState_CopyVersionFromLocal(m_StateMachine));
+            m_StateMachine.RegisterState(HotUpdateStateId.StartCopyVersionsFromLocal, new HotUpdateState_CopyVersionFromLocal(m_StateMachine));
+            m_StateMachine.RegisterState(HotUpdateStateId.CopingVersionsFromStreamingAssets, new HotUpdateState_CopingVersionsFromStreamingAssets(m_StateMachine));
             m_StateMachine.RegisterState(HotUpdateStateId.DownloadVersionsFromServer, new HotUpdateState_DownloadVersionsFromServer(m_StateMachine));
-            m_StateMachine.RegisterState(HotUpdateStateId.PreparedDownloadAB, new HotUpdateState_PrepareDownload(m_StateMachine));
-            m_StateMachine.RegisterState(HotUpdateStateId.DownloadAB, new HotUpdateState_DownloadVersionsFromServer(m_StateMachine));
+            m_StateMachine.RegisterState(HotUpdateStateId.PreparedDownloadAB, new HotUpdateState_PreparedDownloadAB(m_StateMachine));
+            m_StateMachine.RegisterState(HotUpdateStateId.DownloadingAB, new HotUpdateState_DownloadingAB(m_StateMachine));
 
             m_StateMachine.SetCurState(HotUpdateStateId.Wait);
         }
@@ -48,7 +51,58 @@ namespace VGameFrame
             m_StateMachine.OnUpdate();
         }
 
-        
+        private void OnUpdate(long progress, long size, float speed)
+        {
+            //OnMessage(string.Format("下载中...{0}/{1}, 速度：{2}",
+            //    Downloader.GetDisplaySize(progress),
+            //    Downloader.GetDisplaySize(size),
+            //    Downloader.GetDisplaySpeed(speed)));
+
+            //OnProgress(progress * 1f / size);
+            Debug.Log("Download progress: " + progress * 1f / size);
+        }
+
+        private void OnComplete()
+        {
+            //if (enableVFS)
+            //{
+            //    var dataPath = _savePath + Versions.Dataname;
+            //    var downloads = _downloader.downloads;
+            //    if (downloads.Count > 0 && File.Exists(dataPath))
+            //    {
+            //        OnMessage("更新本地版本信息");
+            //        var files = new List<VFile>(downloads.Count);
+            //        foreach (var download in downloads)
+            //        {
+            //            files.Add(new VFile
+            //            {
+            //                name = download.name,
+            //                hash = download.hash,
+            //                len = download.len,
+            //            });
+            //        }
+
+            //        var file = files[0];
+            //        if (!file.name.Equals(Versions.Dataname))
+            //        {
+            //            Versions.UpdateDisk(dataPath, files);
+            //        }
+            //    }
+
+            //    Versions.LoadDisk(dataPath);
+            //}
+
+            //OnProgress(1);
+            //OnMessage("更新完成");
+            Debug.Log("Download finish");
+            //var version = ABVersions.LoadVersion(m_SavePath + ABVersions.versionDetail);
+            //if (version > 0)
+            //{
+            //    OnVersion(version.ToString());
+            //}
+
+            //StartCoroutine(LoadGameScene());
+        }
     }
 
 }

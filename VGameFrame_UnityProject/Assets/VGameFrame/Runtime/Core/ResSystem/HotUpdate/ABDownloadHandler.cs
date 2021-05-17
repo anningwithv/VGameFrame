@@ -111,6 +111,8 @@ namespace VGameFrame
                 return;
             }
 
+            Debug.Log("Start Download£º" + url);
+
             error = null;
             finished = false;
             _running = true;
@@ -123,7 +125,7 @@ namespace VGameFrame
                 _request.SetRequestHeader("Range", "bytes=" + position + "-");
                 _request.downloadHandler = this;
                 _request.SendWebRequest();
-                Debug.Log("Start Download£º" + url);
+                Debug.Log("Send web request£º" + url);
             }
             else
             {

@@ -26,5 +26,5 @@ MonoBehaviour:
   - name: assets/vgameframe/demo/ui/mainmenu.unity3d
     id: 0
     deps: 
-    len: 7105
-    hash: 00d78512cd0e9c106486e2e48b06ca71
+    len: 7117
+    hash: 0e110b63fe98dd62d206446fab7d7bca
