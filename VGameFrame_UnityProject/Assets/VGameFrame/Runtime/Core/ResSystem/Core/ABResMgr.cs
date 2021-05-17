@@ -25,7 +25,7 @@ namespace VGameFrame
         private static Dictionary<string, string> _assetToBundles = new Dictionary<string, string>();
         private static Dictionary<string, string[]> _bundleToDependencies = new Dictionary<string, string[]>();
 
-        private static Dictionary<string, AssetRequest> _assets = new Dictionary<string, AssetRequest>();
+        private static Dictionary<string, AssetRequest> m_LoadedAssets = new Dictionary<string, AssetRequest>();
         private static List<AssetRequest> _loadingAssets = new List<AssetRequest>();
         private static List<AssetRequest> _unusedAssets = new List<AssetRequest>();
         //private static List<SceneAssetRequest> _scenes = new List<SceneAssetRequest>();
@@ -61,7 +61,7 @@ namespace VGameFrame
 
         }
 
-        public ManifestRequest LoadManifest()
+        public static ManifestRequest LoadManifest()
         {
             ManifestRequest request = new ManifestRequest { name = ManifestAsset };
             AddAssetRequest(request);
@@ -92,6 +92,21 @@ namespace VGameFrame
                     Debug.LogError(string.Format("{0} bundle {1} not exist.", path, item.bundle));
                 }
             }
+        }
+
+        public static AssetRequest LoadAssetAsync(string path, Type type)
+        {
+            return LoadAsset(path, type, true);
+        }
+
+        public static AssetRequest LoadAsset(string path, Type type)
+        {
+            return LoadAsset(path, type, false);
+        }
+
+        public static void UnloadAsset(AssetRequest asset)
+        {
+            asset.Release();
         }
 
         internal static BundleRequest LoadBundle(string assetBundleName)
@@ -155,9 +170,18 @@ namespace VGameFrame
             bundle.Release();
         }
 
+        internal static string[] GetAllDependencies(string bundle)
+        {
+            string[] deps;
+            if (_bundleToDependencies.TryGetValue(bundle, out deps))
+                return deps;
+
+            return new string[0];
+        }
+
         private static void AddAssetRequest(AssetRequest request)
         {
-            _assets.Add(request.name, request);
+            m_LoadedAssets.Add(request.name, request);
             _loadingAssets.Add(request);
             request.Load();
         }
@@ -173,7 +197,7 @@ namespace VGameFrame
                 --i;
             }
 
-            foreach (var item in _assets)
+            foreach (var item in m_LoadedAssets)
             {
                 if (item.Value.isDone && item.Value.IsUnused())
                 {
@@ -187,7 +211,7 @@ namespace VGameFrame
                 {
                     var request = _unusedAssets[i];
                     Debug.Log(string.Format("UnloadAsset:{0}", request.name));
-                    _assets.Remove(request.name);
+                    m_LoadedAssets.Remove(request.name);
                     request.Unload();
                 }
                 _unusedAssets.Clear();
@@ -254,6 +278,57 @@ namespace VGameFrame
             }
         }
 
+        private static AssetRequest LoadAsset(string path, Type type, bool async)
+        {
+            if (string.IsNullOrEmpty(path))
+            {
+                Debug.LogError("invalid path");
+                return null;
+            }
+
+            path = GetExistPath(path);
+
+            AssetRequest request;
+            if (m_LoadedAssets.TryGetValue(path, out request))
+            {
+                request.Retain();
+                _loadingAssets.Add(request);
+                return request;
+            }
+
+            string assetBundleName;
+            if (GetAssetBundleName(path, out assetBundleName))
+            {
+                request = async
+                    ? new BundleAssetRequestAsync(assetBundleName)
+                    : new BundleAssetRequest(assetBundleName);
+            }
+            else
+            {
+                //if (path.StartsWith("http://", StringComparison.Ordinal) ||
+                //    path.StartsWith("https://", StringComparison.Ordinal) ||
+                //    path.StartsWith("file://", StringComparison.Ordinal) ||
+                //    path.StartsWith("ftp://", StringComparison.Ordinal) ||
+                //    path.StartsWith("jar:file://", StringComparison.Ordinal))
+                //    request = new WebAssetRequest();
+                //else
+                    request = new AssetRequest();
+            }
+
+            request.name = path;
+            request.assetType = type;
+            AddAssetRequest(request);
+            request.Retain();
+            Debug.Log(string.Format("LoadAsset:{0}", path));
+            return request;
+        }
+
+        private static bool GetAssetBundleName(string path, out string assetBundleName)
+        {
+            return _assetToBundles.TryGetValue(path, out assetBundleName);
+        }
+
+
         private static string GetDataPath(string bundleName)
         {
             if (string.IsNullOrEmpty(updatePath))
@@ -302,5 +377,41 @@ namespace VGameFrame
 
             return bestFitIndex != -1 ? bundlesWithVariant[bestFitIndex] : assetBundleName;
         }
+
+        private static List<string> _searchPaths = new List<string>();
+
+        private static string GetExistPath(string path)
+        {
+#if UNITY_EDITOR
+            if (!runtimeMode)
+            {
+                if (File.Exists(path))
+                    return path;
+
+                foreach (var item in _searchPaths)
+                {
+                    var existPath = string.Format("{0}/{1}", item, path);
+                    if (File.Exists(existPath))
+                        return existPath;
+                }
+
+                Debug.LogError("找不到资源路径" + path);
+                return path;
+            }
+#endif
+            if (_assetToBundles.ContainsKey(path))
+                return path;
+
+            foreach (var item in _searchPaths)
+            {
+                var existPath = string.Format("{0}/{1}", item, path);
+                if (_assetToBundles.ContainsKey(existPath))
+                    return existPath;
+            }
+
+            Debug.LogError("资源没有收集打包" + path);
+            return path;
+        }
+
     }
 }

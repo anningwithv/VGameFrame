@@ -108,11 +108,19 @@ namespace VGameFrame
 
         private IEnumerator LoadManifest()
         {
-            ManifestRequest manifestRequest = ABResMgr.Instance.LoadManifest();
+            ManifestRequest manifestRequest = ABResMgr.LoadManifest();
 
             yield return manifestRequest;
 
             Debug.Log("Manifest loaded");
+            yield return null;
+
+            AssetRequest request = ABResMgr.LoadAsset("MainMenuPanel", typeof(GameObject));
+
+            yield return request;
+
+            GameObject go = (GameObject)request.asset;
+
         }
     }
 
