@@ -103,7 +103,11 @@ namespace VGameFrame
 
             //StartCoroutine(LoadGameScene());
 
-            StartCoroutine(LoadManifest());
+            //StartCoroutine(LoadManifest());
+            ResMgr.Instance.LoadManifest();
+            ResLoader resLoader = new ResLoader();
+            GameObject go = resLoader.LoadSync<GameObject>(ResType.BundleAsset, "MainMenuPanel.prefab");
+            //resLoader.LoadSync<GameObject>(ResType.BundleAsset, "Triangle.png");
         }
 
         private IEnumerator LoadManifest()

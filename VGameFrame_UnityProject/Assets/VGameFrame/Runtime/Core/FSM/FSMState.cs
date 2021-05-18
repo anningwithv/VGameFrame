@@ -30,7 +30,7 @@ namespace VGameFrame
 
         public virtual void OnEnter()
         {
-
+            Debug.Log("On Enter State:" + m_StateId.ToString());
         }
 
         public virtual void OnExecute()
@@ -40,7 +40,7 @@ namespace VGameFrame
 
         public virtual void OnExit()
         {
-
+            Debug.Log("On Exit State:" + m_StateId.ToString());
         }
 
         protected void SetCurState(T stateId)

@@ -48,10 +48,11 @@ namespace VGameFrame
             //    }
             //    yield break;
             //}
-
+            Debug.Log("DownloadVersionsFromServer Create request");
             var request = UnityWebRequest.Get(GetDownloadURL(ABVersions.versionDetail));
             request.downloadHandler = new DownloadHandlerFile(ABHotUpdater1.Instance.SavePath + ABVersions.versionDetail);
             yield return request.SendWebRequest();
+            Debug.Log("DownloadVersionsFromServer Download done");
             var error = request.error;
             request.Dispose();
             if (!string.IsNullOrEmpty(error))
@@ -67,6 +68,8 @@ namespace VGameFrame
                 //{
                 //    Quit();
                 //}
+                ABHotUpdater1.Instance.OnComplete();
+                Debug.LogError("Error: " + error.ToString());
                 yield break;
             }
             try
