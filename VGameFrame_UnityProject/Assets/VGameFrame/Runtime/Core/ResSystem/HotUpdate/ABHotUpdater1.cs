@@ -115,7 +115,7 @@ namespace VGameFrame
             Debug.Log("Manifest loaded");
             yield return null;
 
-            AssetRequest request = ABResMgr.LoadAsset("MainMenuPanel", typeof(GameObject));
+            AssetRequest request = ABResMgr.LoadAsset("Assets/VGameFrame/Demo/UI/MainMenu/MainMenuPanel.prefab", typeof(GameObject));
 
             yield return request;
 

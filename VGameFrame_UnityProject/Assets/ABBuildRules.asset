@@ -20,7 +20,7 @@ MonoBehaviour:
   searchPatternPrefab: '*.prefab'
   searchPatternScene: '*.unity'
   searchPatternText: '*.txt,*.bytes,*.json,*.csv,*.xml,*htm,*.html,*.yaml,*.fnt'
-  version: 6
+  version: 8
   rules:
   - searchPath: Assets/VGameFrame/Demo/UI
     searchPattern: '*'
@@ -33,6 +33,8 @@ MonoBehaviour:
   ruleAssets:
   - bundle: assets/vgameframe/demo/ui/button.unity3d
     path: Assets/VGameFrame/Demo/UI/Button/Button.prefab
+  - bundle: assets/vgameframe/demo/ui/button.unity3d
+    path: Assets/VGameFrame/Demo/UI/Button/Triangle.png
   - bundle: assets/vgameframe/demo/ui/mainmenu.unity3d
     path: Assets/VGameFrame/Demo/UI/MainMenu/MainMenuPanel.prefab
   - bundle: assets/vgameframe/demo/ui/mainmenu.unity3d
@@ -43,6 +45,7 @@ MonoBehaviour:
   - name: assets/vgameframe/demo/ui/button.unity3d
     assets:
     - Assets/VGameFrame/Demo/UI/Button/Button.prefab
+    - Assets/VGameFrame/Demo/UI/Button/Triangle.png
   - name: assets/vgameframe/demo/ui/mainmenu.unity3d
     assets:
     - Assets/VGameFrame/Demo/UI/MainMenu/MainMenuPanel.prefab

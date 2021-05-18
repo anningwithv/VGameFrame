@@ -82,7 +82,7 @@ namespace VGameFrame
 
             foreach (var item in assets)
             {
-                var path = string.Format("{0}/{1}", dirs[item.dir], item.name);
+                var path = string.Format("{0}/{1}", dirs[item.dir], item.name).ToLower();
                 if (item.bundle >= 0 && item.bundle < bundles.Length)
                 {
                     _assetToBundles[path] = bundles[item.bundle].name;
@@ -382,6 +382,8 @@ namespace VGameFrame
 
         private static string GetExistPath(string path)
         {
+            path = path.ToLower();
+
 #if UNITY_EDITOR
             if (!runtimeMode)
             {
