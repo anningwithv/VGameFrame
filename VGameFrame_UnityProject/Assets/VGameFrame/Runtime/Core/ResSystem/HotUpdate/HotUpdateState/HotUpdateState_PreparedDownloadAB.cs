@@ -23,7 +23,7 @@ namespace VGameFrame
         {
             base.OnEnter();
 
-            var totalSize = ABHotUpdater1.Instance.ABDownloader.size;
+            var totalSize = ABHotUpdater.Instance.ABDownloader.size;
             if (totalSize > 0)
             {
                 var tips = string.Format("发现内容更新，总计需要下载 {0} 内容", ABDownloader.GetDisplaySize(totalSize));
@@ -32,7 +32,7 @@ namespace VGameFrame
                 //if (mb.isOk)
                 if (true)
                 {
-                    ABHotUpdater1.Instance.ABDownloader.StartDownload();
+                    ABHotUpdater.Instance.ABDownloader.StartDownload();
                     SetCurState(HotUpdateStateId.DownloadingAB);
                 }
                 else
@@ -43,7 +43,7 @@ namespace VGameFrame
             }
             else
             {
-                ABHotUpdater1.Instance.OnComplete();
+                ABHotUpdater.Instance.OnComplete();
             }
         }
     }

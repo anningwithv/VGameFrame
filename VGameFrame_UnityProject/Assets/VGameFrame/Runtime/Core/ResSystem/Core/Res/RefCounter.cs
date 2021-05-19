@@ -12,12 +12,29 @@ using UnityEngine;
 
 namespace VGameFrame
 {
-	public class GameFrameEntry : TMonoSingleton<GameFrameEntry>
-	{
-        private void Start()
+    public class RefCounter : IRefCounter
+    {
+        public int RefCount { get; private set; }
+
+        public void Retain(object refOwner = null)
         {
-            ABResMgr.Instance.OnInit();
+            RefCount++;
+        }
+
+        public void Release(object refOwner = null)
+        {
+            RefCount--;
+
+            if (RefCount == 0)
+            {
+                OnZeroRef();
+            }
+        }
+
+        protected virtual void OnZeroRef()
+        {
+
         }
     }
-	
+
 }

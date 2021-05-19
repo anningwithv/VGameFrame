@@ -26,19 +26,13 @@ namespace VGameFrame
         public string updatePath { get; set; }
         public Dictionary<string, Res> LoadedAssets { get => m_LoadedAssets;}
 
-        //private static readonly int MAX_BUNDLES_PERFRAME = 0;
-        private Dictionary<string, BundleRequest> _bundles = new Dictionary<string, BundleRequest>();
-        private List<BundleRequest> _loadingBundles = new List<BundleRequest>();
-        private List<BundleRequest> _unusedBundles = new List<BundleRequest>();
-        //private static List<BundleRequest> _toloadBundles = new List<BundleRequest>();
+
         private List<string> _activeVariants = new List<string>();
         private Dictionary<string, string> _assetNameToBundles = new Dictionary<string, string>();
         private Dictionary<string, string[]> _bundleToDependencies = new Dictionary<string, string[]>();
 
         private Dictionary<string, Res> m_LoadedAssets = new Dictionary<string, Res>();
-        private List<AssetRequest> _loadingAssets = new List<AssetRequest>();
-        private List<AssetRequest> _unusedAssets = new List<AssetRequest>();
-        //private static List<SceneAssetRequest> _scenes = new List<SceneAssetRequest>();
+
         private ABManifest m_ABManifest = null;
 
         //public List<Res> SharedLoadedReses = new List<Res>();
@@ -73,7 +67,7 @@ namespace VGameFrame
             //ManifestRequest request = new ManifestRequest { name = ManifestAsset };
             //AddAssetRequest(request);
             string assetName = "ABManifest.asset";
-            if (ABResMgr.runtimeMode)
+            if (runtimeMode)
             {
                 var assetBundleName = assetName.Replace(".asset", ".unity3d")/*.ToLower()*/;
 

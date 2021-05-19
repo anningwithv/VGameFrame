@@ -21,13 +21,12 @@ namespace VGameFrame
 
         private void Init()
         {
-            ABResMgr.Instance.OnInit();
             ResMgr.Instance.OnInit();
         }
 
         private void Update()
         {
-            ABResMgr.Instance.OnUpdate();
+
         }
     }
 	

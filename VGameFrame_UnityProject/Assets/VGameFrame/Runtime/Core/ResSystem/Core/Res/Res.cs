@@ -27,7 +27,7 @@ namespace VGameFrame
         BundleAsset,
     }
 
-    public abstract class Res : RefCounter2
+    public abstract class Res : RefCounter
 	{
         public ResState State
         {
