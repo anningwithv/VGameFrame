@@ -46,9 +46,12 @@ namespace VGameFrame
             }
         }
 
+        public ResType ResType { get; set; }
+
         private ResState m_State;
 
         public UnityEngine.Object Asset { get; protected set; }
+
         public string Name { get; protected set; }
 
         public abstract bool LoadSync();

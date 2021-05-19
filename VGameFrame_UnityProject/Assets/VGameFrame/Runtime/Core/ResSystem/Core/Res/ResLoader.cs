@@ -51,7 +51,7 @@ namespace VGameFrame
         #region Private		
         private T DoLoadSync<T>(ResType resType, string name) where T : Object
         {
-            var res = GetOrCreateRes(name);
+            var res = GetRes(name);
 
             if (res != null)
             {
@@ -69,13 +69,18 @@ namespace VGameFrame
 
             res.LoadSync();
 
+            if ( res.Asset == null)
+            {
+                Debug.LogError("Res load faild: " + res.Name);
+            }
+
             return res.Asset as T;
         }
 
         private void DoLoadAsync<T>(ResType resType, string name, Action<T> onLoaded) where T : Object
         {
             // 查询当前的 资源记录
-            var res = GetOrCreateRes(name);
+            var res = GetRes(name);
 
             Action<Res> onResLoaded = null;
 
@@ -111,7 +116,7 @@ namespace VGameFrame
 
         private List<Res> m_ResRecord = new List<Res>();
 
-        private Res GetOrCreateRes(string assetName)
+        private Res GetRes(string assetName)
         {
             // 查询当前的 资源记录
             var res = GetResFromRecord(assetName);

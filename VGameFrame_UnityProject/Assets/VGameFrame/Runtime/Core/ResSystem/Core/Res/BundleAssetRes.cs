@@ -16,12 +16,12 @@ namespace VGameFrame
 {
     public class BundleAssetRes : Res
     {
-        public AssetBundle AssetBundle
-        {
-            get { return Asset as AssetBundle; }
-            set { Asset = value; }
-        }
-
+        //public AssetBundle AssetBundle
+        //{
+        //    get { return Asset as AssetBundle; }
+        //    set { Asset = value; }
+        //}
+        private AssetBundle m_AssetBundle;
         private string m_OwnerBundleName;
 
         public BundleAssetRes(string assetName, string ownerBundleName)
@@ -35,6 +35,8 @@ namespace VGameFrame
             m_OwnerBundleName = ownerBundleName;
 
             State = ResState.Waiting;
+
+            ResType = ResType.BundleAsset;
         }
 
         private ResLoader m_ResLoader = new ResLoader();
@@ -45,7 +47,7 @@ namespace VGameFrame
 
             if (ResMgr.Instance.runtimeMode)
             {
-                m_ResLoader.LoadSync<AssetBundle>(ResType.Bundle, m_OwnerBundleName);
+                m_AssetBundle = m_ResLoader.LoadSync<AssetBundle>(ResType.Bundle, m_OwnerBundleName);
 
                 string[] dependencyBundleNames = ResMgr.Instance.GetAllDependencies(m_OwnerBundleName);
 
@@ -56,12 +58,13 @@ namespace VGameFrame
                 
             }
 
-            var url = ResMgr.Instance.GetDataPath(m_OwnerBundleName) + m_OwnerBundleName;
-            AssetBundle = AssetBundle.LoadFromFile(url);
+            //var url = ResMgr.Instance.GetDataPath(m_OwnerBundleName) + m_OwnerBundleName;
+            //AssetBundle = AssetBundle.LoadFromFile(url);
+            Asset = m_AssetBundle.LoadAsset<UnityEngine.Object>(Name);
 
             State = ResState.Loaded;
 
-            return AssetBundle;
+            return Asset != null;
         }
 
         private void LoadDependencyBundlesAsync(Action onAllLoaded)
@@ -120,7 +123,8 @@ namespace VGameFrame
 
                     resRequest.completed += operation =>
                     {
-                        AssetBundle = resRequest.assetBundle;
+                        m_AssetBundle = resRequest.assetBundle;
+                        Asset = m_AssetBundle.LoadAsset<UnityEngine.Object>(Name);
 
                         State = ResState.Loaded;
                     };
@@ -130,10 +134,12 @@ namespace VGameFrame
 
         protected override void OnReleaseRes()
         {
-            if (AssetBundle != null)
+            if (m_AssetBundle != null)
             {
-                AssetBundle.Unload(true);
-                AssetBundle = null;
+                m_AssetBundle.Unload(true);
+                m_AssetBundle = null;
+
+                Asset = null;
 
                 m_ResLoader.ReleaseAll();
                 m_ResLoader = null;
