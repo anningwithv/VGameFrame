@@ -72,25 +72,25 @@ namespace VGameFrame
             //if (ResMgr.Instance.GetAssetBundleName(Name, out assetBundleName))
             {
                 string[] dependencyBundleNames = ResMgr.Instance.GetAllDependencies(m_OwnerBundleName);
-                List<String> dependencyBundleNamesList = dependencyBundleNames.ToList();
-                dependencyBundleNamesList.Add(m_OwnerBundleName);
+                //List<String> dependencyBundleNamesList = dependencyBundleNames.ToList();
+                //dependencyBundleNamesList.Add(m_OwnerBundleName);
 
                 var loadedCount = 0;
 
-                if (dependencyBundleNamesList.Count == 0)
+                if (dependencyBundleNames.Length == 0)
                 {
                     if (onAllLoaded != null)
                         onAllLoaded.Invoke();
                 }
 
-                foreach (var dependencyBundleName in dependencyBundleNamesList)
+                foreach (var dependencyBundleName in dependencyBundleNames)
                 {
                     m_ResLoader.LoadAsync<AssetBundle>(ResType.Bundle, dependencyBundleName,
                         dependBundle =>
                         {
                             loadedCount++;
 
-                            if (loadedCount == dependencyBundleNamesList.Count)
+                            if (loadedCount == dependencyBundleNames.Length)
                             {
                                 if (onAllLoaded != null)
                                     onAllLoaded.Invoke();
@@ -119,15 +119,23 @@ namespace VGameFrame
                 }
                 else
                 {
-                    var resRequest = AssetBundle.LoadFromFileAsync(Name);
+                    m_ResLoader.LoadAsync<AssetBundle>(ResType.Bundle, m_OwnerBundleName,
+                        dependBundle =>
+                        {
+                            m_AssetBundle = dependBundle;
+                            Asset = m_AssetBundle.LoadAsset<UnityEngine.Object>(Name);
 
-                    resRequest.completed += operation =>
-                    {
-                        m_AssetBundle = resRequest.assetBundle;
-                        Asset = m_AssetBundle.LoadAsset<UnityEngine.Object>(Name);
+                            State = ResState.Loaded;
+                        });
+                    //var resRequest = AssetBundle.LoadFromFileAsync(Name);
 
-                        State = ResState.Loaded;
-                    };
+                    //resRequest.completed += operation =>
+                    //{
+                    //    m_AssetBundle = resRequest.assetBundle;
+                    //    Asset = m_AssetBundle.LoadAsset<UnityEngine.Object>(Name);
+
+                    //    State = ResState.Loaded;
+                    //};
                 }
             });
         }

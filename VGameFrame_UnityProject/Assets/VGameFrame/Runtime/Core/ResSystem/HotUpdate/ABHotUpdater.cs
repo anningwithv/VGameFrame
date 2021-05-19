@@ -106,16 +106,18 @@ namespace VGameFrame
             //StartCoroutine(LoadManifest());
             ResMgr.Instance.LoadManifest();
             ResLoader resLoader = new ResLoader();
-            GameObject mainMenuPrefab = resLoader.LoadSync<GameObject>(ResType.BundleAsset, "MainMenuPanel.prefab");
-            Canvas canvas = FindObjectOfType<Canvas>();
-            if (canvas != null)
-            {
-                GameObject go = GameObject.Instantiate(mainMenuPrefab);
-                go.transform.SetParent(canvas.transform);
-                go.transform.localPosition = Vector3.zero;
-                go.transform.localEulerAngles = Vector3.zero;
-                go.transform.localScale = new Vector3(1, 1, 1);
-            }
+            resLoader.LoadAsync<GameObject>(ResType.BundleAsset, "MainMenuPanel.prefab", mainMenuPrefab => {
+                Canvas canvas = FindObjectOfType<Canvas>();
+                if (canvas != null)
+                {
+                    GameObject go = GameObject.Instantiate(mainMenuPrefab);
+                    go.transform.SetParent(canvas.transform);
+                    go.transform.localPosition = Vector3.zero;
+                    go.transform.localEulerAngles = Vector3.zero;
+                    go.transform.localScale = new Vector3(1, 1, 1);
+                }
+            });
+
             //resLoader.LoadSync<GameObject>(ResType.BundleAsset, "Triangle.png");
         }
    

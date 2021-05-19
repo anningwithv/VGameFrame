@@ -105,7 +105,8 @@ namespace VGameFrame
             }
             else
             {
-                var resRequest = AssetBundle.LoadFromFileAsync(Name);
+                var url = ResMgr.Instance.GetDataPath(Name) + Name;
+                var resRequest = AssetBundle.LoadFromFileAsync(url);
 
                 resRequest.completed += operation =>
                 {
