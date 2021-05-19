@@ -9,7 +9,7 @@ namespace VGameFrame
 {
     public static class ABBuilder
     {
-        public static string outputPath = Application.streamingAssetsPath + "/" + GetPlatformName();
+        public static string outputPath = "DLC/" + GetPlatformName();
 
         internal static ABBuildRules GetBuildRules()
         {
