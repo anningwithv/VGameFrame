@@ -29,11 +29,38 @@ namespace VGameFrame
             DoLoadAsync(resType, name, onLoaded);
         }
 
+        public void ReleaseAsset(string name)
+        {
+            if (string.IsNullOrEmpty(name))
+            {
+                return;
+            }
+
+            var res = GetFromResMgr(name);
+            if (res == null)
+            {
+                return;
+            }
+
+            if (m_ResRecord.Remove(res))
+            {
+                res.SubRef();
+            }
+        }
+
         public void ReleaseAll()
         {
-            m_ResRecord.ForEach(loadedAsset => loadedAsset.Release());
+            if (m_ResRecord.Count > 0)
+            {
+                m_ResRecord.ForEach(loadedAsset =>
+                {
+                    loadedAsset.SubRef();
+                });
 
-            m_ResRecord.Clear();
+                m_ResRecord.Clear();
+
+                ResMgr.Instance.SetResMapDirty();
+            }
         }
 
         #endregion
@@ -47,6 +74,11 @@ namespace VGameFrame
             if (res == null)
             {
                 res = GetFromResMgr(name);
+
+                if (res != null)
+                {
+                    AddRes2Record(res);
+                }
             }
 
             if (res != null)
@@ -80,6 +112,11 @@ namespace VGameFrame
             if (res == null)
             {
                 res = GetFromResMgr(name);
+
+                if (res != null)
+                {
+                    AddRes2Record(res);
+                }
             }
 
             Action<Res> onResLoaded = null;
@@ -132,8 +169,6 @@ namespace VGameFrame
             if (ResMgr.Instance.LoadedAssets.ContainsKey(assetName))
             {
                 Res res = ResMgr.Instance.LoadedAssets[assetName];
-
-                AddRes2Record(res);
 
                 return res;
             }

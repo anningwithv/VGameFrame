@@ -26,7 +26,7 @@ namespace VGameFrame
 
         private void Update()
         {
-
+            ResMgr.Instance.OnUpdate();
         }
     }
 	

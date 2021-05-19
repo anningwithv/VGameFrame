@@ -15,9 +15,9 @@ namespace VGameFrame
 {
     public class BundleRes : Res
     {
-        private AssetBundle m_AssetBundle;
+        private ResLoader m_ResLoader = new ResLoader();
 
-        //private string m_Path;
+        private AssetBundle m_AssetBundle;
 
         public BundleRes(string bundleName)
         {
@@ -33,23 +33,9 @@ namespace VGameFrame
             ResType = ResType.Bundle;
         }
 
-        private ResLoader m_ResLoader = new ResLoader();
-
-
         public override bool LoadSync()
         {
             State = ResState.Loading;
-
-            //if (ResMgr.Instance.runtimeMode)
-            //{   
-            //    string[] dependencyBundleNames = ResMgr.Instance.GetAllDependencies(Name);
-
-            //    foreach (var dependencyBundleName in dependencyBundleNames)
-            //    {
-            //        m_ResLoader.LoadSync<AssetBundle>(ResType.Bundle, dependencyBundleName);
-            //    }
-                
-            //}
 
             var url = ResMgr.Instance.GetDataPath(Name) + Name;
             m_AssetBundle = AssetBundle.LoadFromFile(url);
@@ -61,43 +47,9 @@ namespace VGameFrame
             return m_AssetBundle != null;
         }
 
-        //private void LoadDependencyBundlesAsync(Action onAllLoaded)
-        //{
-
-        //    string[] dependencyBundleNames = ResMgr.Instance.GetAllDependencies(Name);
-
-        //    var loadedCount = 0;
-
-        //    if (dependencyBundleNames.Length == 0)
-        //    {
-        //        if (onAllLoaded != null)
-        //            onAllLoaded.Invoke();
-        //    }
-
-        //    foreach (var dependencyBundleName in dependencyBundleNames)
-        //    {
-        //        m_ResLoader.LoadAsync<AssetBundle>(ResType.Bundle, dependencyBundleName,
-        //            dependBundle =>
-        //            {
-        //                loadedCount++;
-
-        //                if (loadedCount == dependencyBundleNames.Length)
-        //                {
-        //                    if (onAllLoaded != null)
-        //                        onAllLoaded.Invoke();
-        //                }
-        //            });
-        //    }  
-        //}
-
         public override void LoadAsync()
         {
             State = ResState.Loading;
-
-            //LoadDependencyBundlesAsync(() =>
-            //{
-
-            //});
 
             if (!ResMgr.Instance.runtimeMode)
             {

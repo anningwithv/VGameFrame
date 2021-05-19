@@ -21,7 +21,7 @@ namespace VGameFrame
             RefCount++;
         }
 
-        public void Release(object refOwner = null)
+        public void SubRef(object refOwner = null)
         {
             RefCount--;
 

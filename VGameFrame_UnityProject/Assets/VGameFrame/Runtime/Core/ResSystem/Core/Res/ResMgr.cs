@@ -35,7 +35,8 @@ namespace VGameFrame
 
         private ABManifest m_ABManifest = null;
 
-        //public List<Res> SharedLoadedReses = new List<Res>();
+        private bool m_IsResMapDirty = false;
+
         #region IElement
         public void OnInit()
         {
@@ -52,7 +53,10 @@ namespace VGameFrame
 
         public void OnUpdate()
         {
-
+            if (m_IsResMapDirty)
+            {
+                RemoveUnusedRes();
+            }
         }
 
         public void OnDestroy()
@@ -79,7 +83,7 @@ namespace VGameFrame
                     ABManifest abManifest = assetBundle.LoadAsset<ABManifest>(assetName);
                     if (abManifest != null)
                     {
-                        OnLoadManifest(abManifest);
+                        OnManifestLoaded(abManifest);
                     }
                 }
 
@@ -87,7 +91,7 @@ namespace VGameFrame
 
         }
 
-        public void OnLoadManifest(ABManifest manifest)
+        public void OnManifestLoaded(ABManifest manifest)
         {
             m_ABManifest = manifest;
 
@@ -128,6 +132,23 @@ namespace VGameFrame
 
             return new string[0];
         }
+
+        public Res GetRes(string name)
+        {
+            Res res = null;
+
+            if (m_LoadedAssets.ContainsKey(name))
+            {
+                res = m_LoadedAssets[name];
+            }
+
+            return res;
+        }
+
+        public void SetResMapDirty()
+        {
+            m_IsResMapDirty = true;
+        }
         #endregion
 
         #region Private
@@ -142,20 +163,6 @@ namespace VGameFrame
 
             return basePath;
         }
-
-        //private string GetAssetPath(string assetName)
-        //{
-        //    foreach (var item in m_ABManifest.assets)
-        //    {
-        //        if (item.name == assetName)
-        //        {
-        //            var path = string.Format("{0}/{1}", m_ABManifest.dirs[item.dir], item.name).ToLower();
-        //            return path;
-        //        }
-        //    }
-
-        //    return string.Empty;
-        //}
 
         private string RemapVariantName(string assetBundleName)
         {
@@ -231,6 +238,30 @@ namespace VGameFrame
             Debug.LogError("资源没有收集打包" + path);
             return path;
         }
+
+        private void RemoveUnusedRes()
+        {
+            if (!m_IsResMapDirty)
+            {
+                return;
+            }
+
+            m_IsResMapDirty = false;
+
+            Res res = null;
+            List<Res> list = m_LoadedAssets.Values.ToList();
+            for (int i = list.Count - 1; i >= 0; --i)
+            {
+                res = list[i];
+                if (res.RefCount <= 0 && res.State != ResState.Loading)
+                {
+                    //res.SubRef();
+                    m_LoadedAssets.Remove(res.Name);
+                    //res.Recycle2Cache();                    
+                }
+            }
+        }
+
         #endregion
 
 #if UNITY_EDITOR

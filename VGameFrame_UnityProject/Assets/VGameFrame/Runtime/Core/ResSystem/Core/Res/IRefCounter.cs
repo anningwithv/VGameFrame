@@ -18,7 +18,7 @@ namespace VGameFrame
 
         void Retain(object refOwner = null);
 
-        void Release(object refOwner = null);
+        void SubRef(object refOwner = null);
     }
 	
 }
