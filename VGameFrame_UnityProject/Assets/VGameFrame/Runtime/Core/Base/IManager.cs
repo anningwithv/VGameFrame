@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace VGameFrame
 {
-    public interface IElement
+    public interface IManager
     {
         void OnInit();
         void OnUpdate();

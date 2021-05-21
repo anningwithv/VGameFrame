@@ -1,4 +1,4 @@
-//-------------------------------------------------------
+ï»¿//-------------------------------------------------------
 //  Desc:        Framework For Game Develop with Unity3d 
 //  Copyright:   Copyright (C) 2021. All rights reserved. 
 //  Website:     https://github.com/anningwithv/VGameFrame. 
@@ -15,7 +15,7 @@ using UnityEngine;
 
 namespace VGameFrame
 {
-	public class ResMgr : TMonoSingleton<ResMgr>, IElement
+	public class ResMgr : TMonoSingleton<ResMgr>, IManager
     {
         public readonly string ManifestAsset = "Assets/Manifest.asset";
         public readonly string Extension = ".unity3d";
@@ -221,7 +221,7 @@ namespace VGameFrame
                         return existPath;
                 }
 
-                Debug.LogError("ÕÒ²»µ½×ÊÔ´Â·¾¶" + path);
+                Debug.LogError("æ‰¾ä¸åˆ°èµ„æºè·¯å¾„" + path);
                 return path;
             }
 #endif
@@ -235,7 +235,7 @@ namespace VGameFrame
                     return existPath;
             }
 
-            Debug.LogError("×ÊÔ´Ã»ÓĞÊÕ¼¯´ò°ü" + path);
+            Debug.LogError("èµ„æºæ²¡æœ‰æ”¶é›†æ‰“åŒ…" + path);
             return path;
         }
 
