@@ -9,7 +9,7 @@ namespace VGameFrame
 {
     public static class ABBuilder
     {
-        public static string outputPath = Application.streamingAssetsPath + "/DLC/" + GetPlatformName();
+        public static string outputPath = "DLC/" + GetPlatformName();
 
         internal static ABBuildRules GetBuildRules()
         {
@@ -99,7 +99,7 @@ namespace VGameFrame
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();
 
-            var manifestBundleName = "manifest.unity3d";
+            var manifestBundleName = "ABManifest.unity3d";
             builds = new[] {
                 new AssetBundleBuild {
                     assetNames = new[] { AssetDatabase.GetAssetPath (manifest), },

@@ -24,12 +24,12 @@ namespace VGameFrame
         {
             base.OnEnter();
 
-            Observable.FromCoroutine(UpdateCopy).Subscribe(_ => { SetCurState(HotUpdateStateId.DownloadVersionsFromServer); }).AddTo(ABHotUpdater1.Instance.gameObject);
+            Observable.FromCoroutine(UpdateCopy).Subscribe(_ => { SetCurState(HotUpdateStateId.DownloadVersionsFromServer); }).AddTo(ABHotUpdater.Instance.gameObject);
         }
 
         private IEnumerator UpdateCopy()
         {
-            var path = ABHotUpdater1.Instance.SavePath + ABVersions.versionDetail + ".tmp";
+            var path = ABHotUpdater.Instance.SavePath + ABVersions.versionDetail + ".tmp";
             var versions = ABVersions.LoadVersions(path);
             var basePath = PlatformUtil.GetStreamingAssetsPath() + "/";
 
@@ -37,7 +37,7 @@ namespace VGameFrame
             if (version.name.Equals(ABVersions.bundleDetail))
             {
                 var request = UnityWebRequest.Get(basePath + version.name);
-                request.downloadHandler = new DownloadHandlerFile(ABHotUpdater1.Instance.SavePath + version.name);
+                request.downloadHandler = new DownloadHandlerFile(ABHotUpdater.Instance.SavePath + version.name);
                 var req = request.SendWebRequest();
                 while (!req.isDone)
                 {
@@ -54,7 +54,7 @@ namespace VGameFrame
                 {
                     var item = versions[index];
                     var request = UnityWebRequest.Get(basePath + item.name);
-                    request.downloadHandler = new DownloadHandlerFile(ABHotUpdater1.Instance.SavePath + item.name);
+                    request.downloadHandler = new DownloadHandlerFile(ABHotUpdater.Instance.SavePath + item.name);
                     yield return request.SendWebRequest();
                     request.Dispose();
                     //OnMessage(string.Format("正在复制文件：{0}/{1}", index, versions.Count));

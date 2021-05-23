@@ -24,17 +24,17 @@ namespace VGameFrame
         {
             base.OnEnter();
 
-            Observable.FromCoroutine(RequestCopy).Subscribe(_ => { }).AddTo(ABHotUpdater1.Instance.gameObject);
+            Observable.FromCoroutine(RequestCopy).Subscribe(_ => { }).AddTo(ABHotUpdater.Instance.gameObject);
         }
 
         private IEnumerator RequestCopy()
         {
             //Load version from saved path
-            var versionInSavedPath = ABVersions.LoadVersion(ABHotUpdater1.Instance.SavePath + ABVersions.versionDetail);
-            var streamingAssetsPath = PlatformUtil.GetStreamingAssetsPath()+ "/DLC/" + ABHotUpdater1.Instance.Platform + "/";
+            var versionInSavedPath = ABVersions.LoadVersion(ABHotUpdater.Instance.SavePath + ABVersions.versionDetail);
+            var streamingAssetsPath = PlatformUtil.GetStreamingAssetsPath()+ "/" + ABHotUpdater.Instance.Platform + "/";
             //Download version from streaming assets path to saved path .tmp
             var request = UnityWebRequest.Get(streamingAssetsPath + ABVersions.versionDetail);
-            var tmpSavedPath = ABHotUpdater1.Instance.SavePath + ABVersions.versionDetail + ".tmp";
+            var tmpSavedPath = ABHotUpdater.Instance.SavePath + ABVersions.versionDetail + ".tmp";
             request.downloadHandler = new DownloadHandlerFile(tmpSavedPath);
 
             yield return request.SendWebRequest();

@@ -14,17 +14,35 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   activeVariants: []
   dirs:
+  - Assets/VGameFrame/Demo/UI/Button
   - Assets/VGameFrame/Demo/UI/MainMenu
+  - Assets/VGameFrame/Demo/UI/MainMenuSubPanel
   assets:
-  - name: MainMenuPanel.prefab
+  - name: Button.prefab
     bundle: 0
     dir: 0
   - name: Triangle.png
     bundle: 0
     dir: 0
+  - name: MainMenuPanel.prefab
+    bundle: 1
+    dir: 1
+  - name: MainMenuSubPanel.prefab
+    bundle: 2
+    dir: 2
   bundles:
-  - name: assets/vgameframe/demo/ui/mainmenu.unity3d
+  - name: assets/vgameframe/demo/ui/button.unity3d
     id: 0
     deps: 
-    len: 7117
-    hash: 0e110b63fe98dd62d206446fab7d7bca
+    len: 9218
+    hash: e54729a805729457ddff0aa9867841a9
+  - name: assets/vgameframe/demo/ui/mainmenu.unity3d
+    id: 1
+    deps: 0000000002000000
+    len: 9998
+    hash: 383be4623e9e31de150bba71342ceaec
+  - name: assets/vgameframe/demo/ui/mainmenusubpanel.unity3d
+    id: 2
+    deps: 00000000
+    len: 9718
+    hash: e87069c8675541a8877af81b4adb0b2b
