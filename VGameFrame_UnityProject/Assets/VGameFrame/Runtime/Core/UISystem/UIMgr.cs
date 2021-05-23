@@ -1,7 +1,7 @@
 ﻿//-------------------------------------------------------
 //  Desc:        Framework For Game Develop with Unity3d 
 //  Copyright:   Copyright (C) 2021. All rights reserved. 
-//  Website:     https://github.com/anningwithv/VGameFrame. 
+//  Website:     https://github.com/anningwithv/VGameFramework. 
 //  Author:      V 
 //-------------------------------------------------------
 
@@ -10,7 +10,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-namespace VGameFrame
+namespace VGameFramework
 {
     public class UIMgr : TSingleton<UIMgr>, IManager
     {
@@ -36,7 +36,7 @@ namespace VGameFrame
         }
         #endregion
 
-        public void OpenPanel(UIID panelId)
+        public void OpenPanel<T>(UIID panelId)
         {
             UIPanel panel = null;
             if (m_ActivePanelDic.TryGetValue(panelId, out panel))

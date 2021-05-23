@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 
-namespace VGameFrame
+namespace VGameFramework
 {
     public class TSingleton<T> : ISingleton where T : TSingleton<T>, new()
 	{

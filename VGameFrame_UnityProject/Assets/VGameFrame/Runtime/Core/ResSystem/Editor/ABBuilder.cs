@@ -5,7 +5,7 @@ using System.IO;
 using UnityEditor;
 using UnityEngine;
 
-namespace VGameFrame
+namespace VGameFramework
 {
     public static class ABBuilder
     {

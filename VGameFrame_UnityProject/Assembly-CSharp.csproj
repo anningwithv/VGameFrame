@@ -62,18 +62,30 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\VGameFrame\Runtime\Core\Base\IElement.cs" />
+    <Compile Include="Assets\VGameFrame\Demo\TestLoadAndUnload.cs" />
+    <Compile Include="Assets\VGameFrame\Runtime\Core\Base\IManager.cs" />
+    <Compile Include="Assets\VGameFrame\Runtime\Core\Event\EventSystem.cs" />
     <Compile Include="Assets\VGameFrame\Runtime\Core\FSM\FSMState.cs" />
     <Compile Include="Assets\VGameFrame\Runtime\Core\FSM\FSMStateMachine.cs" />
     <Compile Include="Assets\VGameFrame\Runtime\Core\FSM\IFSMState.cs" />
+    <Compile Include="Assets\VGameFrame\Runtime\Core\GameMgr.cs" />
+    <Compile Include="Assets\VGameFrame\Runtime\Core\Pool\IPoolType.cs" />
+    <Compile Include="Assets\VGameFrame\Runtime\Core\Pool\IPoolable.cs" />
+    <Compile Include="Assets\VGameFrame\Runtime\Core\Pool\ObjectPool.cs" />
     <Compile Include="Assets\VGameFrame\Runtime\Core\ResSystem\Core\ABManifest.cs" />
-    <Compile Include="Assets\VGameFrame\Runtime\Core\ResSystem\Core\ABResMgr.cs" />
     <Compile Include="Assets\VGameFrame\Runtime\Core\ResSystem\Core\ABVersions.cs" />
+    <Compile Include="Assets\VGameFrame\Runtime\Core\ResSystem\Core\Res\BundleAssetRes.cs" />
+    <Compile Include="Assets\VGameFrame\Runtime\Core\ResSystem\Core\Res\BundleRes.cs" />
+    <Compile Include="Assets\VGameFrame\Runtime\Core\ResSystem\Core\Res\IRefCounter.cs" />
+    <Compile Include="Assets\VGameFrame\Runtime\Core\ResSystem\Core\Res\RefCounter.cs" />
+    <Compile Include="Assets\VGameFrame\Runtime\Core\ResSystem\Core\Res\Res.cs" />
+    <Compile Include="Assets\VGameFrame\Runtime\Core\ResSystem\Core\Res\ResFactory.cs" />
+    <Compile Include="Assets\VGameFrame\Runtime\Core\ResSystem\Core\Res\ResLoader.cs" />
+    <Compile Include="Assets\VGameFrame\Runtime\Core\ResSystem\Core\Res\ResMgr.cs" />
     <Compile Include="Assets\VGameFrame\Runtime\Core\ResSystem\Core\VersionDisk.cs" />
     <Compile Include="Assets\VGameFrame\Runtime\Core\ResSystem\HotUpdate\ABDownloadHandler.cs" />
     <Compile Include="Assets\VGameFrame\Runtime\Core\ResSystem\HotUpdate\ABDownloader.cs" />
     <Compile Include="Assets\VGameFrame\Runtime\Core\ResSystem\HotUpdate\ABHotUpdater.cs" />
-    <Compile Include="Assets\VGameFrame\Runtime\Core\ResSystem\HotUpdate\ABHotUpdater1.cs" />
     <Compile Include="Assets\VGameFrame\Runtime\Core\ResSystem\HotUpdate\HotUpdateState\HotUpdateStateId.cs" />
     <Compile Include="Assets\VGameFrame\Runtime\Core\ResSystem\HotUpdate\HotUpdateState\HotUpdateState_CopingVersionsFromStreamingAssets.cs" />
     <Compile Include="Assets\VGameFrame\Runtime\Core\ResSystem\HotUpdate\HotUpdateState\HotUpdateState_CopyVersionFromLocal.cs" />
@@ -89,12 +101,16 @@
     <Compile Include="Assets\VGameFrame\Runtime\Core\Singleton\MonoSingleton.cs" />
     <Compile Include="Assets\VGameFrame\Runtime\Core\Singleton\TMonoSingleton.cs" />
     <Compile Include="Assets\VGameFrame\Runtime\Core\Singleton\TSingleton.cs" />
+    <Compile Include="Assets\VGameFrame\Runtime\Core\UISystem\Panel\IPanel.cs" />
+    <Compile Include="Assets\VGameFrame\Runtime\Core\UISystem\Panel\PanelInfo.cs" />
+    <Compile Include="Assets\VGameFrame\Runtime\Core\UISystem\Panel\UIPanel.cs" />
+    <Compile Include="Assets\VGameFrame\Runtime\Core\UISystem\UIID.cs" />
+    <Compile Include="Assets\VGameFrame\Runtime\Core\UISystem\UIMgr.cs" />
+    <Compile Include="Assets\VGameFrame\Runtime\Core\UISystem\UIRoot.cs" />
     <Compile Include="Assets\VGameFrame\Runtime\Define\EngineDefine.cs" />
     <Compile Include="Assets\VGameFrame\Runtime\Define\EngineEvent.cs" />
     <Compile Include="Assets\VGameFrame\Runtime\EngineConfig.cs" />
-    <Compile Include="Assets\VGameFrame\Runtime\GameFrameEntry.cs" />
     <None Include="Assets\VGameFrame\Plugins\UniRx\ReadMe.txt" />
-    <None Include="Assets\Resources\Version.txt" />
     <Reference Include="UnityEngine">
       <HintPath>D:/Program/UnityHub/Unity2018.4.3/2019.4.24f1c1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>

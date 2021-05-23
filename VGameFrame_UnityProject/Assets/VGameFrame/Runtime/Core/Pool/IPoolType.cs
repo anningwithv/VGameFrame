@@ -1,4 +1,4 @@
-﻿//-------------------------------------------------------
+//-------------------------------------------------------
 //  Desc:        Framework For Game Develop with Unity3d 
 //  Copyright:   Copyright (C) 2021. All rights reserved. 
 //  Website:     https://github.com/anningwithv/VGameFramework. 
@@ -10,13 +10,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-namespace VGameFramework
+namespace VGameFrameworkwork
 {
-	public interface IPanel
+	public interface IPoolType
 	{
-        void OnInit();
-        void OnOpen();
-        void OnClose();
+        void RecycleToCache();
 	}
 	
 }

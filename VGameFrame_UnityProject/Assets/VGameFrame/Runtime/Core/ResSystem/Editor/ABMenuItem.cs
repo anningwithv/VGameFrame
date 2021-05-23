@@ -4,18 +4,18 @@ using System.Diagnostics;
 using UnityEditor;
 using UnityEngine;
 
-namespace VGameFrame
+namespace VGameFramework
 {
     public static class ABMenuItem
     {
-        [MenuItem("Assets/VGameFrame/ABBundle/Apply Rule/Directory", false, 1)]
+        [MenuItem("Assets/VGameFramework/ABBundle/Apply Rule/Directory", false, 1)]
         private static void ApplyRuleDir()
         {
             var rules = ABBuilder.GetBuildRules();
             AddRulesForSelection(rules, rules.searchPatternDir);
         }
 
-        [MenuItem("Assets/VGameFrame/ABBundle/BuildAssetBundles")]
+        [MenuItem("Assets/VGameFramework/ABBundle/BuildAssetBundles")]
         private static void BuildAssetBundles()
         {
             var watch = new Stopwatch();
@@ -26,7 +26,7 @@ namespace VGameFrame
             UnityEngine.Debug.Log("BuildAssetBundles " + watch.ElapsedMilliseconds + " ms.");
         }
 
-        [MenuItem("Assets/VGameFrame/ABBundle/ViewAssetBundles")]
+        [MenuItem("Assets/VGameFramework/ABBundle/ViewAssetBundles")]
         private static void ViewDataPath()
         {
             EditorUtility.OpenWithDefaultApp(Application.persistentDataPath);

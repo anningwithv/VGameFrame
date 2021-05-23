@@ -66,7 +66,6 @@
     <Compile Include="Assets\VGameFrame\Runtime\Core\ResSystem\Editor\ABBuildRules.cs" />
     <Compile Include="Assets\VGameFrame\Runtime\Core\ResSystem\Editor\ABBuilder.cs" />
     <Compile Include="Assets\VGameFrame\Runtime\Core\ResSystem\Editor\ABMenuItem.cs" />
-    <Compile Include="Assets\Version2\Res\Editor\AssetBundleBuilder.cs" />
     <Reference Include="UnityEngine">
       <HintPath>D:/Program/UnityHub/Unity2018.4.3/2019.4.24f1c1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>

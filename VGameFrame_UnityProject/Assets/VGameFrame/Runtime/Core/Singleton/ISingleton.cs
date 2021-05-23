@@ -3,7 +3,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace VGameFrame
+namespace VGameFramework
 {
     public interface ISingleton
     {

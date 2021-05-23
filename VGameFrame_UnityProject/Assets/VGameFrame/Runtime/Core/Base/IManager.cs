@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace VGameFrame
+namespace VGameFramework
 {
     public interface IManager
     {

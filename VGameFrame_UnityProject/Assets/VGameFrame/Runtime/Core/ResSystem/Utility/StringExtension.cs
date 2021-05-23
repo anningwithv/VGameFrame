@@ -1,4 +1,4 @@
-namespace VGameFrame
+namespace VGameFramework
 {
     public static class StringExtension
     {

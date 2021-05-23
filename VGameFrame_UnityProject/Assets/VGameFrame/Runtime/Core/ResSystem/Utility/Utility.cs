@@ -4,7 +4,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.IO;
 
-namespace VGameFrame
+namespace VGameFramework
 {
     public static class Utility
     {

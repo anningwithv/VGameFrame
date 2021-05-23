@@ -1,7 +1,7 @@
 //-------------------------------------------------------
 //  Desc:        Framework For Game Develop with Unity3d 
 //  Copyright:   Copyright (C) 2021. All rights reserved. 
-//  Website:     https://github.com/anningwithv/VGameFrame. 
+//  Website:     https://github.com/anningwithv/VGameFramework. 
 //  Author:      V 
 //-------------------------------------------------------
 
@@ -10,12 +10,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-namespace VGameFrame
+namespace VGameFramework
 {
-    [CreateAssetMenu(menuName = "VGameFrame/Create EngineConfig ")]
+    [CreateAssetMenu(menuName = "VGameFramework/Create EngineConfig ")]
     public class EngineConfig : ScriptableObject
 	{
-        public string url = "http://172.16.1.170/DLC/";
+        public string url = "http://192.168.3.87/DLC/";
 	}
 	
 }

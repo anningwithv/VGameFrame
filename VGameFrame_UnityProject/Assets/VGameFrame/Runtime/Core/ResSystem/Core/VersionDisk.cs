@@ -4,7 +4,7 @@ using System.IO;
 using System.Net;
 using UnityEngine;
 
-namespace VGameFrame
+namespace VGameFramework
 {
 	public class VersionFile
 	{

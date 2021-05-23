@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
-namespace VGameFrame
+namespace VGameFramework
 {
     public enum VerifyBy
     {
