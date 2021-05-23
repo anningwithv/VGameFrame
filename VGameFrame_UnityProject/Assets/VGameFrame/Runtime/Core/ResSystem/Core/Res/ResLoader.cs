@@ -9,15 +9,53 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using VGameFramework;
 using Object = UnityEngine.Object;
 
 namespace VGameFramework
 {
-	public class ResLoader
+	public class ResLoader: IPoolable, IPoolType
 	{
+        public string name;
+
         private List<Res> m_ResRecord = new List<Res>();
 
+
+        public static ResLoader Allocate(string name)
+        {
+            ResLoader loader = ObjectPool<ResLoader>.Instance.Allocate();
+            loader.name = name;
+            return loader;
+        }
+
+
+        #region IPoolable
+
+        public bool IsRecycled { get; set; }
+
+        public void OnRecycled()
+        {
+            m_ResRecord.Clear();
+        }
+
+        #endregion
+
+        #region IPoolType
+
+        public void RecycleToCache()
+        {
+            ObjectPool<ResLoader>.Instance.Recycle(this);
+        }
+
+        #endregion
+
         #region API		
+        public T LoadSync<T>(string name) where T : Object
+        {
+            return DoLoadSync<T>(ResType.BundleAsset, name);
+
+        }
+
         public T LoadSync<T>(ResType resType, string name) where T : Object
         {
             return DoLoadSync<T>(resType, name);

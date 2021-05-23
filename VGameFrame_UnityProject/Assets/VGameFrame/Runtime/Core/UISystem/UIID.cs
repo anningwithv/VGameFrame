@@ -15,7 +15,7 @@ namespace VGameFramework
 	public enum UIID
 	{
         None,
-
+        LoadingPanel,
 	}
 	
 }

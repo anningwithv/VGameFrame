@@ -10,7 +10,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-namespace VGameFrameworkwork
+namespace VGameFramework
 {
 	public interface IPoolType
 	{

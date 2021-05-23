@@ -12,7 +12,7 @@ using UnityEngine;
 
 namespace VGameFramework
 {
-	public class GameMgr : TMonoSingleton<GameMgr>
+	public class FrameworkMgr : TMonoSingleton<FrameworkMgr>
 	{
         private void Awake()
         {
@@ -22,6 +22,7 @@ namespace VGameFramework
         private void Init()
         {
             ResMgr.Instance.OnInit();
+            UIMgr.Instance.OnInit();
         }
 
         private void Update()

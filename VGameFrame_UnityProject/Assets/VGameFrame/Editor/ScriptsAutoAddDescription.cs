@@ -8,7 +8,7 @@ namespace VGameFramework
 {
     public class ScriptsAutoAddDescription : UnityEditor.AssetModificationProcessor
     {
-        static string namespaceName = "VGameFrameworkwork";
+        static string namespaceName = "VGameFramework";
 
         /// <summary>
         /// 将要创建资源时会调用这个函数

@@ -19,18 +19,20 @@ namespace VGameFramework
         void Start()
 	    {
             ResMgr.Instance.LoadManifest();
-            resLoader = new ResLoader();
-            resLoader.LoadAsync<GameObject>(ResType.BundleAsset, "MainMenuPanel.prefab", mainMenuPrefab => {
-                Canvas canvas = FindObjectOfType<Canvas>();
-                if (canvas != null)
-                {
-                    GameObject go = GameObject.Instantiate(mainMenuPrefab);
-                    go.transform.SetParent(canvas.transform);
-                    go.transform.localPosition = Vector3.zero;
-                    go.transform.localEulerAngles = Vector3.zero;
-                    go.transform.localScale = new Vector3(1, 1, 1);
-                }
-            });
+            //resLoader = new ResLoader();
+            //resLoader.LoadAsync<GameObject>(ResType.BundleAsset, "MainMenuPanel.prefab", mainMenuPrefab => {
+            //    Canvas canvas = FindObjectOfType<Canvas>();
+            //    if (canvas != null)
+            //    {
+            //        GameObject go = GameObject.Instantiate(mainMenuPrefab);
+            //        go.transform.SetParent(canvas.transform);
+            //        go.transform.localPosition = Vector3.zero;
+            //        go.transform.localEulerAngles = Vector3.zero;
+            //        go.transform.localScale = new Vector3(1, 1, 1);
+            //    }
+            //});
+
+            UIMgr.Instance.OpenPanel(UIID.LoadingPanel);
         }
 	
 	    // Update is called once per frame
