@@ -1,4 +1,4 @@
-//-------------------------------------------------------
+ï»¿//-------------------------------------------------------
 //  Desc:        Framework For Game Develop with Unity3d 
 //  Copyright:   Copyright (C) 2021. All rights reserved. 
 //  Website:     https://github.com/anningwithv/VGameFramework. 
@@ -27,15 +27,15 @@ namespace VGameFramework
         {
             base.OnEnter();
 
-            Observable.FromCoroutine(RequestVersions).Subscribe(_ => { }).AddTo(ABHotUpdater.Instance.gameObject);
+            Observable.FromCoroutine(DownloadVersionsFromServer).Subscribe(_ => { }).AddTo(ABHotUpdater.Instance.gameObject);
         }
 
-        private IEnumerator RequestVersions()
+        private IEnumerator DownloadVersionsFromServer()
         {
-            //OnMessage("ÕıÔÚ»ñÈ¡°æ±¾ĞÅÏ¢...");
+            //OnMessage("æ­£åœ¨è·å–ç‰ˆæœ¬ä¿¡æ¯...");
             //if (Application.internetReachability == NetworkReachability.NotReachable)
             //{
-            //    //var mb = MessageBox.Show("ÌáÊ¾", "Çë¼ì²éÍøÂçÁ¬½Ó×´Ì¬", "ÖØÊÔ", "ÍË³ö");
+            //    //var mb = MessageBox.Show("æç¤º", "è¯·æ£€æŸ¥ç½‘ç»œè¿æ¥çŠ¶æ€", "é‡è¯•", "é€€å‡º");
             //    //yield return mb;
             //    //if (mb.isOk)
             //    if (true)
@@ -48,16 +48,18 @@ namespace VGameFramework
             //    }
             //    yield break;
             //}
-            Debug.Log("DownloadVersionsFromServer Create request");
-            var request = UnityWebRequest.Get(GetDownloadURL(ABVersions.versionDetail));
+            Debug.Log("DownloadVersionsFromServer: Create request");
+            string url = GetDownloadURL(ABVersions.versionDetail);
+            Debug.Log("DownloadVersionsFromServer, url is: " + url);
+            var request = UnityWebRequest.Get(url);
             request.downloadHandler = new DownloadHandlerFile(ABHotUpdater.Instance.SavePath + ABVersions.versionDetail);
             yield return request.SendWebRequest();
-            Debug.Log("DownloadVersionsFromServer Download done");
+            Debug.Log("DownloadVersionsFromServer: Download done");
             var error = request.error;
             request.Dispose();
             if (!string.IsNullOrEmpty(error))
             {
-                //var mb = MessageBox.Show("ÌáÊ¾", string.Format("»ñÈ¡·şÎñÆ÷°æ±¾Ê§°Ü£º{0}", error), "ÖØÊÔ", "ÍË³ö");
+                //var mb = MessageBox.Show("æç¤º", string.Format("è·å–æœåŠ¡å™¨ç‰ˆæœ¬å¤±è´¥ï¼š{0}", error), "é‡è¯•", "é€€å‡º");
                 //yield return mb;
                 //if (mb.isOk)
                 //if (true)
@@ -68,8 +70,9 @@ namespace VGameFramework
                 //{
                 //    Quit();
                 //}
+                Debug.LogError("Download versions Error: " + error.ToString());
+
                 ABHotUpdater.Instance.OnComplete();
-                Debug.LogError("Error: " + error.ToString());
                 yield break;
             }
             try
@@ -89,7 +92,7 @@ namespace VGameFramework
             catch (Exception e)
             {
                 Debug.LogException(e);
-                //MessageBox.Show("ÌáÊ¾", "°æ±¾ÎÄ¼ş¼ÓÔØÊ§°Ü", "ÖØÊÔ", "ÍË³ö").onComplete +=
+                //MessageBox.Show("æç¤º", "ç‰ˆæœ¬æ–‡ä»¶åŠ è½½å¤±è´¥", "é‡è¯•", "é€€å‡º").onComplete +=
                 //    delegate (MessageBox.EventId id)
                 //    {
                 //        if (id == MessageBox.EventId.Ok)
@@ -106,9 +109,8 @@ namespace VGameFramework
 
         private string GetDownloadURL(string filename)
         {
-            EngineConfig engineConfig = ScriptableObject.CreateInstance<EngineConfig>();
-
-            return string.Format("{0}{1}/{2}", engineConfig.url, ABHotUpdater.Instance.Platform, filename);
+            string url = string.Format("{0}{1}/{2}", EngineConfig.Instance.url, ABHotUpdater.Instance.Platform, filename);
+            return url;
         }
 
         private void PrepareDownloads()
@@ -148,7 +150,7 @@ namespace VGameFramework
             //    var downloads = _downloader.downloads;
             //    if (downloads.Count > 0 && File.Exists(dataPath))
             //    {
-            //        OnMessage("¸üĞÂ±¾µØ°æ±¾ĞÅÏ¢");
+            //        OnMessage("æ›´æ–°æœ¬åœ°ç‰ˆæœ¬ä¿¡æ¯");
             //        var files = new List<VFile>(downloads.Count);
             //        foreach (var download in downloads)
             //        {
@@ -171,9 +173,9 @@ namespace VGameFramework
             //}
 
             //OnProgress(1);
-            //OnMessage("¸üĞÂÍê³É");
+            //OnMessage("æ›´æ–°å®Œæˆ");
             Debug.Log("Download finish");
-            var version = ABVersions.LoadVersion(ABHotUpdater.Instance.SavePath + ABVersions.versionDetail);
+            //var version = ABVersions.LoadVersion(ABHotUpdater.Instance.SavePath + ABVersions.versionDetail);
             //if (version > 0)
             //{
             //    OnVersion(version.ToString());

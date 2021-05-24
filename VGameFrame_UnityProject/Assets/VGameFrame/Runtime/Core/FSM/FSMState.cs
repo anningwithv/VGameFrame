@@ -1,4 +1,4 @@
-//-------------------------------------------------------
+﻿//-------------------------------------------------------
 //  Desc:        Framework For Game Develop with Unity3d 
 //  Copyright:   Copyright (C) 2021. All rights reserved. 
 //  Website:     https://github.com/anningwithv/VGameFramework. 
@@ -45,6 +45,7 @@ namespace VGameFramework
 
         protected void SetCurState(T stateId)
         {
+            m_StateId = stateId;
             m_StateMachine.SetCurState(stateId);
         }
     }

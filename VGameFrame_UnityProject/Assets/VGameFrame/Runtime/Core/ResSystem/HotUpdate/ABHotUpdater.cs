@@ -1,4 +1,4 @@
-//-------------------------------------------------------
+ï»¿//-------------------------------------------------------
 //  Desc:        Framework For Game Develop with Unity3d 
 //  Copyright:   Copyright (C) 2021. All rights reserved. 
 //  Website:     https://github.com/anningwithv/VGameFramework. 
@@ -53,7 +53,7 @@ namespace VGameFramework
 
         private void OnUpdate(long progress, long size, float speed)
         {
-            //OnMessage(string.Format("ÏÂÔØÖĞ...{0}/{1}, ËÙ¶È£º{2}",
+            //OnMessage(string.Format("ä¸‹è½½ä¸­...{0}/{1}, é€Ÿåº¦ï¼š{2}",
             //    Downloader.GetDisplaySize(progress),
             //    Downloader.GetDisplaySize(size),
             //    Downloader.GetDisplaySpeed(speed)));
@@ -70,7 +70,7 @@ namespace VGameFramework
             //    var downloads = _downloader.downloads;
             //    if (downloads.Count > 0 && File.Exists(dataPath))
             //    {
-            //        OnMessage("¸üĞÂ±¾µØ°æ±¾ĞÅÏ¢");
+            //        OnMessage("æ›´æ–°æœ¬åœ°ç‰ˆæœ¬ä¿¡æ¯");
             //        var files = new List<VFile>(downloads.Count);
             //        foreach (var download in downloads)
             //        {
@@ -93,7 +93,7 @@ namespace VGameFramework
             //}
 
             //OnProgress(1);
-            //OnMessage("¸üĞÂÍê³É");
+            //OnMessage("æ›´æ–°å®Œæˆ");
             Debug.Log("Download finish");
             //var version = ABVersions.LoadVersion(m_SavePath + ABVersions.versionDetail);
             //if (version > 0)
@@ -107,6 +107,8 @@ namespace VGameFramework
 
 
             //resLoader.LoadSync<GameObject>(ResType.BundleAsset, "Triangle.png");
+
+            EventSystem.Instance.Send(EngineEvent.OnHotUpdateComplete);
         }
    
     }

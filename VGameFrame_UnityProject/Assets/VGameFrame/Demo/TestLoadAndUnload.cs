@@ -1,4 +1,4 @@
-//-------------------------------------------------------
+﻿//-------------------------------------------------------
 //  Desc:        Framework For Game Develop with Unity3d 
 //  Copyright:   Copyright (C) 2021. All rights reserved. 
 //  Website:     https://github.com/anningwithv/VGameFramework. 
@@ -16,9 +16,10 @@ namespace VGameFramework
 	{
         ResLoader resLoader = null;
         // Start is called before the first frame update
-        void Start()
+        void Awake()
 	    {
-            ResMgr.Instance.LoadManifest();
+            EventSystem.Instance.Register(EngineEvent.OnHotUpdateComplete, HandleEvent);
+
             //resLoader = new ResLoader();
             //resLoader.LoadAsync<GameObject>(ResType.BundleAsset, "MainMenuPanel.prefab", mainMenuPrefab => {
             //    Canvas canvas = FindObjectOfType<Canvas>();
@@ -31,8 +32,6 @@ namespace VGameFramework
             //        go.transform.localScale = new Vector3(1, 1, 1);
             //    }
             //});
-
-            UIMgr.Instance.OpenPanel(UIID.LoadingPanel);
         }
 	
 	    // Update is called once per frame
@@ -43,6 +42,12 @@ namespace VGameFramework
                 resLoader.ReleaseAsset("MainMenuPanel.prefab");
             }
 	    }
+
+        private void HandleEvent(int key, params object[] param)
+        {
+            ResMgr.Instance.LoadManifest();
+            UIMgr.Instance.OpenPanel(UIID.LoadingPanel);
+        }
 	}
 	
 }

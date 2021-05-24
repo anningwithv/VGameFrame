@@ -1,4 +1,4 @@
-//-------------------------------------------------------
+ï»¿//-------------------------------------------------------
 //  Desc:        Framework For Game Develop with Unity3d 
 //  Copyright:   Copyright (C) 2021. All rights reserved. 
 //  Website:     https://github.com/anningwithv/VGameFramework. 
@@ -44,7 +44,7 @@ namespace VGameFramework
                 var versionInStreamingAssets = ABVersions.LoadVersion(tmpSavedPath);
                 if (versionInStreamingAssets > versionInSavedPath)
                 {
-                    //var mb = MessageBox.Show("ÌáÊ¾", "ÊÇ·ñ½«×ÊÔ´½âÑ¹µ½±¾µØ£¿", "½âÑ¹", "Ìø¹ı");
+                    //var mb = MessageBox.Show("æç¤º", "æ˜¯å¦å°†èµ„æºè§£å‹åˆ°æœ¬åœ°ï¼Ÿ", "è§£å‹", "è·³è¿‡");
                     //yield return mb;
                     //_step = mb.isOk ? Step.Coping : Step.Versions;
                     //_step = Step.Coping;
@@ -52,7 +52,7 @@ namespace VGameFramework
                 }
                 else
                 {
-                    ABVersions.LoadVersions(tmpSavedPath);
+                    //ABVersions.LoadVersions(tmpSavedPath);
                     SetCurState(HotUpdateStateId.DownloadVersionsFromServer);
                 }
             }
