@@ -1,4 +1,4 @@
-//-------------------------------------------------------
+﻿//-------------------------------------------------------
 //  Desc:        Framework For Game Develop with Unity3d 
 //  Copyright:   Copyright (C) 2021. All rights reserved. 
 //  Website:     https://github.com/anningwithv/VGameFramework. 
@@ -13,17 +13,16 @@ using System.Linq;
 
 namespace VGameFramework
 {
-    [CreateAssetMenu(menuName = "VGameFramework/Create UIPanelConfig ")]
-    public class UIPanelConfig : ScriptableObject
+    public class UIPanelConfig : TSingleton<UIPanelConfig>
 	{
-        public List<PanelConfigInfo> panelPathList = new List<PanelConfigInfo>();
+        private List<PanelConfigInfo> panelPathList = new List<PanelConfigInfo>();
 
         public void Init()
         {
 
         }
 
-        public void RegisterPanel(UIID uid, string panelPath)
+        public void RegisterPanel(int uid, string panelPath)
         {
             if (IsPanelRegistered(uid) == false)
             {
@@ -31,30 +30,29 @@ namespace VGameFramework
             }
         }
 
-        public PanelConfigInfo GetPanelConfigInfo(UIID uid)
+        public PanelConfigInfo GetPanelConfigInfo(int uid)
         {
             PanelConfigInfo configInfo = panelPathList.FirstOrDefault(i => i.uid == uid);
             return configInfo;
         }
 
-        private bool IsPanelRegistered(UIID uid)
+        private bool IsPanelRegistered(int uid)
         {
             bool exist = panelPathList.Any(i => i.uid == uid);
             return exist;
         }
-
-        [System.Serializable]
-        public class PanelConfigInfo
-        {
-            public UIID uid;
-            public string path;
-
-            public PanelConfigInfo(UIID uid, string path)
-            {
-                this.uid = uid;
-                this.path = path;
-            }
-        }
 	}
-	
+
+    [System.Serializable]
+    public class PanelConfigInfo
+    {
+        public int uid;
+        public string path;
+
+        public PanelConfigInfo(int uid, string path)
+        {
+            this.uid = uid;
+            this.path = path;
+        }
+    }
 }
