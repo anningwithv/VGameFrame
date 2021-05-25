@@ -8,11 +8,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using XLua;
 
 namespace VGameFramework
 {
-	public class TestLoadAndUnload : MonoBehaviour
+    [Hotfix]
+    public class TestLoadAndUnload : MonoBehaviour
 	{
         ResLoader resLoader = null;
         // Start is called before the first frame update
@@ -41,12 +42,22 @@ namespace VGameFramework
             {
                 resLoader.ReleaseAsset("MainMenuPanel.prefab");
             }
+
+            if (Input.GetKeyDown(KeyCode.H))
+            {
+                HotFixTest();
+            }
 	    }
 
         private void HandleEvent(int key, params object[] param)
         {
             ResMgr.Instance.LoadManifest();
             UIMgr.Instance.OpenPanel(UIID.LoadingPanel);
+        }
+
+        public void HotFixTest()
+        {
+            Debug.Log("Is hot fixing");
         }
 	}
 	

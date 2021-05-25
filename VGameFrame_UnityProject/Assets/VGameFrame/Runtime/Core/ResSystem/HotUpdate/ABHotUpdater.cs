@@ -59,7 +59,7 @@ namespace VGameFramework
             //    Downloader.GetDisplaySpeed(speed)));
 
             //OnProgress(progress * 1f / size);
-            Debug.Log("Download progress: " + progress * 1f / size);
+            //Debug.Log("Download progress: " + progress * 1f / size);
         }
 
         public void OnComplete()

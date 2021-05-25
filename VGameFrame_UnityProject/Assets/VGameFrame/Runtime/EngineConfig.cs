@@ -15,7 +15,7 @@ namespace VGameFramework
     [CreateAssetMenu(menuName = "VGameFramework/Create EngineConfig ")]
     public class EngineConfig : ScriptableObject
 	{
-        public string url = "http://192.168.3.87/DLC/";
+        public string url = @"http://192.168.3.87/";
 
 
         #region 初始化过程

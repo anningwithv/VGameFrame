@@ -1,0 +1,3 @@
+﻿xlua.hotfix(CS.VGameFramework.TestLoadAndUnload, 'HotFixTest', function(self)
+        print('<<<<<<<<Is Runing lua')
+end)

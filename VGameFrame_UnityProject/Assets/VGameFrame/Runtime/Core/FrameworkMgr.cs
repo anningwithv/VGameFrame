@@ -1,4 +1,4 @@
-//-------------------------------------------------------
+﻿//-------------------------------------------------------
 //  Desc:        Framework For Game Develop with Unity3d 
 //  Copyright:   Copyright (C) 2021. All rights reserved. 
 //  Website:     https://github.com/anningwithv/VGameFramework. 
@@ -23,6 +23,7 @@ namespace VGameFramework
         {
             ResMgr.Instance.OnInit();
             UIMgr.Instance.OnInit();
+            XLuaMgr.Instance.OnInit();
         }
 
         private void Update()

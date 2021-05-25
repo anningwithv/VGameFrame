@@ -15,6 +15,7 @@ MonoBehaviour:
   activeVariants: []
   dirs:
   - Assets/VGameFrame/Demo/UI/Button
+  - Assets/VGameFrame/Demo/UI/Code
   - Assets/VGameFrame/Demo/UI/MainMenu
   - Assets/VGameFrame/Demo/UI/MainMenuSubPanel
   assets:
@@ -24,25 +25,33 @@ MonoBehaviour:
   - name: Triangle.png
     bundle: 0
     dir: 0
-  - name: MainMenuPanel.prefab
+  - name: TextXLuaHotFix.lua.txt
     bundle: 1
     dir: 1
-  - name: MainMenuSubPanel.prefab
+  - name: MainMenuPanel.prefab
     bundle: 2
     dir: 2
+  - name: MainMenuSubPanel.prefab
+    bundle: 3
+    dir: 3
   bundles:
   - name: assets/vgameframe/demo/ui/button.unity3d
     id: 0
     deps: 
-    len: 9230
-    hash: 6315aac332b59990a90ed64170eac082
-  - name: assets/vgameframe/demo/ui/mainmenu.unity3d
+    len: 9218
+    hash: e54729a805729457ddff0aa9867841a9
+  - name: assets/vgameframe/demo/ui/code.unity3d
     id: 1
-    deps: 0000000002000000
-    len: 10010
-    hash: 8062320087c7aeda585cba478f7f59e9
-  - name: assets/vgameframe/demo/ui/mainmenusubpanel.unity3d
+    deps: 
+    len: 1314
+    hash: ec73e36b6ac5094567996fad81fc6215
+  - name: assets/vgameframe/demo/ui/mainmenu.unity3d
     id: 2
+    deps: 0000000003000000
+    len: 9998
+    hash: 383be4623e9e31de150bba71342ceaec
+  - name: assets/vgameframe/demo/ui/mainmenusubpanel.unity3d
+    id: 3
     deps: 00000000
-    len: 9730
-    hash: 7a07879357fc7f37d04120e6a3898a44
+    len: 9718
+    hash: e87069c8675541a8877af81b4adb0b2b

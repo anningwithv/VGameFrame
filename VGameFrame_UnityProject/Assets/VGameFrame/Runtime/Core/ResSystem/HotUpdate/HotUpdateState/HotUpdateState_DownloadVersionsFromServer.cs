@@ -109,7 +109,7 @@ namespace VGameFramework
 
         private string GetDownloadURL(string filename)
         {
-            string url = string.Format("{0}{1}/{2}", EngineConfig.Instance.url, ABHotUpdater.Instance.Platform, filename);
+            string url = string.Format("{0}{1}/{2}", EngineConfig.Instance.url + "DLC/", ABHotUpdater.Instance.Platform, filename);
             return url;
         }
 
