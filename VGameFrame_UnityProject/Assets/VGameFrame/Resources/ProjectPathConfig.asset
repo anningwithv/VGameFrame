@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9f84f63090f3f44c8a32cbac301101c, type: 3}
+  m_Name: ProjectPathConfig
+  m_EditorClassIdentifier: 
+  m_BuildCSharpWinShell: table/output_code_csharp.bat
+  m_BuildTxtDataWinShell: table/output_txt.bat
+  m_BuildLrgDataWinShell: table/output_xc.bat
+  m_BuildCSharpLinuxShell: table/output_code_csharp.sh
+  m_BuildTxtDataLinuxShell: table/output_txt.sh
+  m_BuildTxtDataUnixShell: table/output_txt_unix.sh
+  m_BuildLrgDataLinuxShell: table/output_xc.sh
+  m_ProjectToolsFolder: ../../../Tools/

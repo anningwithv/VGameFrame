@@ -10,6 +10,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e9522aec9fc88ea44ba1abdad14f0fc8, type: 3}
-  m_Name: Engine Config
+  m_Name: EngineConfig
   m_EditorClassIdentifier: 
   url: http://172.16.1.170/

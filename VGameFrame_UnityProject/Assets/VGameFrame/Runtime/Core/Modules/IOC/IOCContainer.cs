@@ -16,18 +16,18 @@ namespace VGameFramework
 {
     public class IOCContainer : IIOCContainer
     {
-        private IOCTypeInstanceDict _instances;
-        private IOCTypeMappingDict _mappings;
+        private IOCTypeInstanceDict m_Instances;
+        private IOCTypeMappingDict m_Mappings;
 
         public IOCTypeInstanceDict Instances
         {
-            get { return _instances ?? (_instances = new IOCTypeInstanceDict()); }
-            set { _instances = value; }
+            get { return m_Instances ?? (m_Instances = new IOCTypeInstanceDict()); }
+            set { m_Instances = value; }
         }
         public IOCTypeMappingDict Mappings
         {
-            get { return _mappings ?? (_mappings = new IOCTypeMappingDict()); }
-            set { _mappings = value; }
+            get { return m_Mappings ?? (m_Mappings = new IOCTypeMappingDict()); }
+            set { m_Mappings = value; }
         }
 
         #region IOCContainer
