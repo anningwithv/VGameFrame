@@ -8,16 +8,16 @@ using VGameFramework;
 
 namespace GameLogic
 {
-    public static partial class TD{{.ClassName}}Table
+    public static partial class TDGlobalConfigTable
     {
-        private static TDTableMetaData m_MetaData = new TDTableMetaData(TD{{.ClassName}}Table.Parse, "{{.FileBaseName}}");
+        private static TDTableMetaData m_MetaData = new TDTableMetaData(TDGlobalConfigTable.Parse, "GlobalConfig");
         public static TDTableMetaData metaData
         {
             get { return m_MetaData; }
         }
         
-        private static Dictionary<{{.KeyType}}, TD{{.ClassName}}> m_DataCache = new Dictionary<{{.KeyType}}, TD{{.ClassName}}>();
-        private static List<TD{{.ClassName}}> m_DataList = new List<TD{{.ClassName}} >();
+        private static Dictionary<int, TDGlobalConfig> m_DataCache = new Dictionary<int, TDGlobalConfig>();
+        private static List<TDGlobalConfig> m_DataList = new List<TDGlobalConfig >();
         
         public static void Parse(byte[] fileData)
         {
@@ -25,27 +25,27 @@ namespace GameLogic
             m_DataList.Clear();
             DataStreamReader dataR = new DataStreamReader(fileData);
             int rowCount = dataR.GetRowCount();
-            int[] fieldIndex = dataR.GetFieldIndex(TD{{.ClassName}}.GetFieldHeadIndex());
+            int[] fieldIndex = dataR.GetFieldIndex(TDGlobalConfig.GetFieldHeadIndex());
     #if (UNITY_STANDALONE_WIN) || UNITY_EDITOR || UNITY_STANDALONE_OSX
-            dataR.CheckFieldMatch(TD{{.ClassName}}.GetFieldHeadIndex(), "{{.ClassName}}Table");
+            dataR.CheckFieldMatch(TDGlobalConfig.GetFieldHeadIndex(), "GlobalConfigTable");
     #endif
             for (int i = 0; i < rowCount; ++i)
             {
-                TD{{.ClassName}} memberInstance = new TD{{.ClassName}}();
+                TDGlobalConfig memberInstance = new TDGlobalConfig();
                 memberInstance.ReadRow(dataR, fieldIndex);
                 OnAddRow(memberInstance);
                 memberInstance.Reset();
                 CompleteRowAdd(memberInstance, rowCount);
             }
-            Log.i(string.Format("Parse Success TD{{.ClassName}}"));
+            Log.i(string.Format("Parse Success TDGlobalConfig"));
         }
 
-        private static void OnAddRow(TD{{.ClassName}} memberInstance)
+        private static void OnAddRow(TDGlobalConfig memberInstance)
         {
-            {{.KeyType}} key = memberInstance.{{.KeyPropName}};
+            int key = memberInstance.id;
             if (m_DataCache.ContainsKey(key))
             {
-                Log.e(string.Format("Invaild,  TD{{.ClassName}}Table Id already exists {0}", key));
+                Log.e(string.Format("Invaild,  TDGlobalConfigTable Id already exists {0}", key));
             }
             else
             {
@@ -67,7 +67,7 @@ namespace GameLogic
             }
         }
 
-        public static List<TD{{.ClassName}}> dataList
+        public static List<TDGlobalConfig> dataList
         {
             get 
             {
@@ -75,7 +75,7 @@ namespace GameLogic
             }    
         }
 
-        public static TD{{.ClassName}} GetData({{.KeyType}} key)
+        public static TDGlobalConfig GetData(int key)
         {
             if (m_DataCache.ContainsKey(key))
             {
@@ -83,7 +83,7 @@ namespace GameLogic
             }
             else
             {
-                Log.w(string.Format("Can't find key {0} in TD{{.ClassName}}", key));
+                Log.w(string.Format("Can't find key {0} in TDGlobalConfig", key));
                 return null;
             }
         }

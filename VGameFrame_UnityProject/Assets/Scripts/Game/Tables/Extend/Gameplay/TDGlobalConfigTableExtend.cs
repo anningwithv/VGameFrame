@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using System;
 using System.IO;
 using System.Collections;
@@ -7,9 +7,9 @@ using VGameFramework;
 
 namespace GameLogic
 {
-    public partial class TD{{.ClassName}}
+    public partial class TDGlobalConfigTable
     {
-        public void Reset()
+        static void CompleteRowAdd(TDGlobalConfig tdData, int rowCount)
         {
 
         }

@@ -7,7 +7,7 @@ using VGameFramework;
 
 namespace GameLogic
 {
-    public partial class TD{{.ClassName}}
+    public partial class TDGlobalConfig
     {
         public void Reset()
         {
